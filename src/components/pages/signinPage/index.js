@@ -3,12 +3,24 @@ import InputComponent from '../../InputComponent';
 import {
   Container,
   Header,
-  SignInBody
+  SignInBody,
+  LoginButton,
+  GoSignUpBtn
 } from './style';
 
 const SignInPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  function handleSubmit (e) {
+    e.preventDefault();
+    const body = {
+      email,
+      password
+    }
+    console.log(body)
+  }
+
   return (
     <Container>
       <Header>
@@ -18,8 +30,24 @@ const SignInPage = () => {
         </div>
       </Header>
       <SignInBody>
-        <InputComponent placeholder="e-mail" value={email} setValue={setEmail} />
-        <InputComponent placeholder="password" value={password} setValue={setPassword} />
+        <form onSubmit={handleSubmit}>
+          <InputComponent 
+            placeholder="e-mail" 
+            value={email} 
+            setValue={setEmail} 
+            type='email'
+            required
+          />
+          <InputComponent 
+            placeholder="password" 
+            value={password} 
+            setValue={setPassword} 
+            type="password"
+            required
+          />
+          <LoginButton>Log In</LoginButton>
+        </form>
+        <GoSignUpBtn>First time? Create an account!</GoSignUpBtn>
       </SignInBody>
     </Container>
   )
