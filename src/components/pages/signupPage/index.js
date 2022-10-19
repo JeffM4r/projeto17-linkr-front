@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import axios from "axios";
+import { Link,useNavigate } from 'react-router-dom';
 import InputComponent from '../../InputComponent';
 import {
     Container,
@@ -9,20 +10,49 @@ import {
 } from './style';
 
 const SignUpPage = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [userName, setUserName] = useState('')
-    const [pictureUrl, setPictureUrl] = useState('')
+    let navigate = useNavigate();
+    const [isSigningUp, setIsSigningUp] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [userName, setUserName] = useState('');
+    const [pictureUrl, setPictureUrl] = useState('');
 
+    function signUpError(error){
+        console.log(error.response.status)
+        if(error.response.status === 409){
+            alert("Email já cadastrado");
+            return
+        }
+        setIsSigningUp(false);
+        alert("Houve um erro nessa tentativa de cadastro, por favor tente novamente");
+    }
+
+    function signUpSucces(){
+        alert("cadastro feito com sucesso")
+        navigate("/")
+    }
+
+    function signUp(cadastro) {
+        const promise = axios.post(`http://localhost:4000/signup`, cadastro);
+        return promise;
+    } 
+    
     function handleSubmit(e) {
         e.preventDefault();
+        if(isSigningUp){return};
+        setIsSigningUp(!isSigningUp);
+
         const body = {
             email,
             password,
-            userName,
-            pictureUrl
+            name:userName,
+            picture:pictureUrl
         }
-        console.log(body)
+
+        const promise = signUp(body);
+
+        promise.then(response => signUpSucces(response));
+        promise.catch(response => signUpError(response));
     }
 
     return (
