@@ -1,5 +1,6 @@
 import { TimelinePage, PageStyle } from "./style";
 import Posts from "./Posts";
+import TrendingComponent from "../../TrendingComponent";
 
 export default function Timeline() {
 	return (
@@ -10,6 +11,7 @@ export default function Timeline() {
 				</div>
 				<Posts />
 			</TimelinePage>
+			<TrendingComponent />
 		</PageStyle>
 	);
 }
