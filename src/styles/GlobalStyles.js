@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
- 
+import { createGlobalStyle } from "styled-components";
+
 const GlobalStyle = createGlobalStyle`
   /* http://meyerweb.com/eric/tools/css/reset/ 
   v2.0 | 20110126
@@ -33,6 +33,8 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
   line-height: 1;
+  background-color: #333333;
+  font-family: 'Lato', sans-serif;
   }
   ol, ul {
   list-style: none;
@@ -54,5 +56,5 @@ const GlobalStyle = createGlobalStyle`
   }
 
 `;
- 
+
 export default GlobalStyle;
