@@ -7,6 +7,8 @@ import SignUpPage from "./components/pages/signupPage";
 import Timeline from "./components/pages/timelinePage";
 
 function App() {
+	const [token, setToken] = useState("");
+
 	return (
 		<>
 			<GlobalStyle />
