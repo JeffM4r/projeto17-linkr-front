@@ -15,14 +15,14 @@ import {
 const SignInPage = () => {
   const navigate = useNavigate()
 
-  const {token, setToken} = useContext(UserContext)
+  const {setToken} = useContext(UserContext)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    if(localStorage.getItem('linkrUserToken') !== null && localStorage.getItem('linkrUserToken') !== 'undefined'){
+    if(localStorage.getItem('linkrUserToken') !== null){
       const localToken = JSON.parse(localStorage.getItem('linkrUserToken'))
       setToken(localToken);
       console.log(localToken)
