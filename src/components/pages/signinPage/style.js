@@ -101,6 +101,25 @@ export const LoginButton = styled.button`
   }
 `;
 
+export const DisableButton = styled.div`
+  width: 80%;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 5px;
+  margin: 10px;
+  background: #90A1D5;
+  color: white;
+  font-size: 27px;
+  font-family: 'Oswald', sans-serif;
+  @media (max-width: 614px) {
+    font-size: 22px;
+    height: 55px;
+  }
+`;
+
 export const GoSignUpBtn = styled.div`
   width: 80%;
   height: 35px;

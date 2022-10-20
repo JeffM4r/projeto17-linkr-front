@@ -1,24 +1,64 @@
-import { useState } from 'react';
+import axios from 'axios';
+import { useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import UserContext from '../../contexts/UserContext';
 import InputComponent from '../../InputComponent';
 import {
   Container,
   Header,
   SignInBody,
   LoginButton,
+  DisableButton,
   GoSignUpBtn
 } from './style';
 
 const SignInPage = () => {
+  const navigate = useNavigate()
+
+  const {setToken} = useContext(UserContext)
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
-  function handleSubmit (e) {
+  useEffect(() => {
+    if(localStorage.getItem('linkrUserToken') !== null){
+      const localToken = JSON.parse(localStorage.getItem('linkrUserToken'))
+      setToken(localToken);
+      console.log(localToken)
+      navigate('/timeline');
+    }
+  }, [])
+
+  function signIn (body) {
+    const promise = axios.post('http://localhost:4000/signin', body)
+    return promise;
+  }
+
+  async function handleSubmit (e) {
+    setIsLoading(true)
     e.preventDefault();
     const body = {
       email,
       password
     }
-    console.log(body)
+ 
+    const resp = signIn(body)
+    resp.catch((error) => {
+      setIsLoading(false)
+      console.log(error)
+      if(error.response.status === 401) alert('Usuario e/ou senha incorretos!')
+      else {
+        alert('Ouve um erro inesperado!')
+      }
+    })
+    resp.then((resp) => {
+      console.log(resp.data) 
+      localStorage.setItem('linkrUserToken', JSON.stringify(resp.data.token))
+      setToken(resp.data.token) 
+      setIsLoading(false)
+      navigate('/timeline')
+    })
   }
 
   return (
@@ -45,9 +85,14 @@ const SignInPage = () => {
             type="password"
             required
           />
-          <LoginButton>Log In</LoginButton>
+          {
+            isLoading ?
+              <DisableButton>Log In</DisableButton>
+            :
+              <LoginButton>Log In</LoginButton>
+          }
         </form>
-        <GoSignUpBtn>First time? Create an account!</GoSignUpBtn>
+        <GoSignUpBtn onClick={() => {navigate('/signup')}}>First time? Create an account!</GoSignUpBtn>
       </SignInBody>
     </Container>
   )
