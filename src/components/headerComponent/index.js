@@ -3,9 +3,13 @@ import {
    MdOutlineKeyboardArrowUp,
    MdOutlineKeyboardArrowDown,
 } from "react-icons/md";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import UserContext from "../contexts/UserContext";
 
 const HeaderComponent = () => {
+   const navigate = useNavigate();
+   const { setToken } = useContext(UserContext);
    const [clicked, setClicked] = useState(false);
    const styleUp = {
       color: "white",
@@ -31,7 +35,15 @@ const HeaderComponent = () => {
                />
             </div>
          </HeaderStyle>
-         <LogoutStyle display={clicked ? "flex" : "none"}>Logout</LogoutStyle>
+         <LogoutStyle
+            onClick={() => {
+               setToken("");
+               navigate("/");
+            }}
+            display={clicked ? "flex" : "none"}
+         >
+            Logout
+         </LogoutStyle>
       </>
    );
 };
