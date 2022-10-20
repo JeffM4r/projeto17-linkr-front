@@ -2,6 +2,7 @@ import mql from "@microlink/mql";
 import { useState, useEffect } from "react";
 import { PostStyle } from "./style";
 import LinkPreview from "../PreviewLinkComponent";
+import hashtagInText from "../hashtagInText";
 
 export default function Post({ username, picture, text, url }) {
 	const [postData, setPostData] = useState({});
@@ -35,7 +36,7 @@ export default function Post({ username, picture, text, url }) {
 						<div>
 							<h3>{username}</h3>
 						</div>
-						<p>{text}</p>
+						<div>{hashtagInText(text)}</div>
 						<LinkPreview
 							title={postData.title}
 							description={postData.description}
