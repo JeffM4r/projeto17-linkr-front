@@ -37,6 +37,7 @@ const HeaderComponent = () => {
          </HeaderStyle>
          <LogoutStyle
             onClick={() => {
+               localStorage.clear();
                setToken("");
                navigate("/");
             }}

@@ -4,7 +4,6 @@ import UserContext from "./components/contexts/UserContext";
 import GlobalStyle from "./styles/GlobalStyles";
 import SignInPage from "./components/pages/signinPage";
 import SignUpPage from "./components/pages/signupPage";
-import HomePage from './components/pages/homePage/index';
 import Timeline from "./components/pages/timelinePage";
 
 function App() {
@@ -18,7 +17,6 @@ function App() {
           <Routes>
             <Route path="/" element={<SignInPage />} />
             <Route path="/signup" element={<SignUpPage />} />
-            <Route path="/home" element={<HomePage />} />
 						<Route path="/timeline" element={<Timeline />} />
           </Routes>
         </BrowserRouter>

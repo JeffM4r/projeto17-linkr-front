@@ -9,6 +9,8 @@ export const HeaderStyle = styled.div`
    height: 72px;
    padding: 0 20px;
    position: fixed;
+   top:0px;
+   left:0px;
    h2 {
       color: white;
       font-size: 49px;
