@@ -1,10 +1,11 @@
 import mql from "@microlink/mql";
 import { useState, useEffect } from "react";
-import { PostStyle } from "./style";
+import { PostStyle, IconDisliked, IconLiked } from "./style";
 import LinkPreview from "../PreviewLinkComponent";
 
 export default function Post({ username, picture, text, url }) {
 	const [postData, setPostData] = useState({});
+	const [liked, setLiked] = useState(false);
 
 	useEffect(() => {
 		mql(url, {
@@ -30,6 +31,22 @@ export default function Post({ username, picture, text, url }) {
 				<PostStyle>
 					<div>
 						<img src={picture} alt={`profile ${username}`} />
+						{liked === false ? (
+							<IconLiked
+								onClick={() => {
+									setLiked(true);
+									//InsertLike()
+								}}
+							></IconLiked>
+						) : (
+							<IconDisliked
+								onClick={() => {
+									setLiked(false);
+									//deleteLike()
+								}}
+							></IconDisliked>
+						)}
+						<span>13 likes</span>
 					</div>
 					<div>
 						<div>
