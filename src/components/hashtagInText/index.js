@@ -1,3 +1,5 @@
+import HashtagComponent from "../HashtagComponent"
+
 function hashtagInText (text) {
 
   let splitText = text.split(' ')
@@ -8,7 +10,7 @@ function hashtagInText (text) {
       splitText.map((element) => {
         let rt = hashtagListFinded.map((hashtag, index) => {
           if(element === hashtag) {
-            return (<span value={index}> {hashtag} </span>)
+            return (<HashtagComponent hashtag={hashtag} />)
           }
           return undefined;
         })
