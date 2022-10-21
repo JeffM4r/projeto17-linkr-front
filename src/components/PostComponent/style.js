@@ -22,9 +22,6 @@ export const PostStyle = styled.div`
 
 	p {
 		line-height: 19px;
-		span {
-			font-weight: 700;
-		}
 	}
 
 	> div:nth-child(2) {

@@ -17,6 +17,10 @@ export const Container = styled.div`
     padding-bottom: 15px;
     border-bottom: 1px solid #484848;
   }
+
+  @media (max-width: 1000px) {
+    display: none;
+  }
 `;
 
 export const TrendsArea = styled.div`
