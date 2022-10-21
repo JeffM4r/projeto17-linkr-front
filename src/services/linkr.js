@@ -58,6 +58,12 @@ function editPost(postId, token, body) {
    return promise;
 }
 
+export default function publishPost(body, token) {
+	const conf = createHeaders(token);
+	const promise = axios.post(`${BASE_URL}/post`, body, conf);
+	return promise;
+}
+
 export {
    getAllRecentPosts,
    getMetaDados,
@@ -65,5 +71,6 @@ export {
    deleteLike,
    signIn,
    signUp,
-   editPost
+   editPost,
+   publishPost
 };
