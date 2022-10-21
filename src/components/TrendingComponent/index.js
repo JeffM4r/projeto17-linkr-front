@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import HashtagComponent from '../HashtagComponent';
 import {
   Container,
   TrendsArea
@@ -21,7 +22,7 @@ const TrendingComponent = () => {
     })
     promise.then((resp) => {
       setHashtagList(resp.data)
-      console.lof(resp.data)
+      console.log(resp.data)
     })
   }, [])
 
@@ -32,7 +33,9 @@ const TrendingComponent = () => {
         {
           hashtagList.map((hashtag) => {
             return (
-              <p>{hashtag.text}</p>
+              <div>
+                <HashtagComponent hashtag={hashtag.text} />
+              </div>
             )
           })
         }

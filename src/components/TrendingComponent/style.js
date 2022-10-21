@@ -5,7 +5,7 @@ export const Container = styled.div`
   height: 400px;
   background-color: #171717;
   margin-left: 40px;
-  margin-top: -400px;
+  margin-top: 208px;
   border-radius: 15px;
   padding: 10px;
   color: white;
@@ -29,15 +29,8 @@ export const TrendsArea = styled.div`
   overflow-y: scroll;
   padding-top: 10px;
 
-  p {
+  div {
     font-size: 19px;
-    font-weight: 700;
-    font-family: Lato, sans-serif;
     margin-top: 5px;
-
-    &:hover{
-      text-decoration: underline;
-      cursor: pointer;
-    }
   }
 `;
