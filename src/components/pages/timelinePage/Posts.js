@@ -3,8 +3,7 @@ import Error from "../../ErrorComponent";
 import Post from "../../PostComponent";
 import { getAllRecentPosts } from "../../../services/linkr";
 
-export default function Posts() {
-	const [posts, setPosts] = useState([]);
+export default function Posts({posts,setPosts}) {
 	const [disabled, setDisabled] = useState(false);
 
 	useEffect(() => {

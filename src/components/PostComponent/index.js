@@ -14,7 +14,7 @@ export default function Post({
    url,
    postId,
    userId,
-   setPosts,
+   setPosts
 }) {
    const [postData, setPostData] = useState({});
    const [editOn, setEditOn] = useState(false);
