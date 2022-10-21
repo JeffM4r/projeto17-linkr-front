@@ -1,22 +1,14 @@
-import mql from "@microlink/mql";
 import { useState, useEffect } from "react";
 import { PostStyle } from "./style";
 import LinkPreview from "../PreviewLinkComponent";
 import hashtagInText from "../hashtagInText";
 import Likes from "../LikesComponent";
+import { getMetaDados } from "../../services/linkr";
 
 export default function Post({ username, picture, text, url, postId, userId }) {
 	const [postData, setPostData] = useState({});
 	useEffect(() => {
-		mql(url, {
-			data: {
-				avatar: {
-					selector: "#avatar",
-					type: "image",
-					attr: "src",
-				},
-			},
-		})
+		getMetaDados(url)
 			.then((resp) => {
 				const data = resp.data;
 				setPostData(data);
