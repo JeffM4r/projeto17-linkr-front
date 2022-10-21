@@ -3,13 +3,13 @@ import {
    MdOutlineKeyboardArrowUp,
    MdOutlineKeyboardArrowDown,
 } from "react-icons/md";
-import { useState, useContext } from "react";
+import { useState, useContext,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
 
 const HeaderComponent = () => {
    const navigate = useNavigate();
-   const { setToken } = useContext(UserContext);
+   const { setToken,setPictureUrl,pictureUrl } = useContext(UserContext);
    const [clicked, setClicked] = useState(false);
    const styleUp = {
       color: "white",
@@ -22,6 +22,18 @@ const HeaderComponent = () => {
       display: clicked ? "none" : "",
    };
 
+
+   useEffect(() => {
+      if(localStorage.getItem('linkrUserToken') !== null){
+        const localToken = localStorage.getItem('linkrUserToken')
+        const localPictureUrl = localStorage.getItem('pictureUrl')
+        setToken(localToken);
+        setPictureUrl(localPictureUrl)
+        console.log(localToken)
+        console.log(localPictureUrl)
+      }
+    }, [])
+
    return (
       <>
          <HeaderStyle>
@@ -30,8 +42,8 @@ const HeaderComponent = () => {
                <MdOutlineKeyboardArrowUp style={styleUp} />
                <MdOutlineKeyboardArrowDown style={styleDown} />
                <img
-                  src="https://3d1.com.br/assets/imagens/galerias/e8784ef0732565ed86e91c6b020e0f2e.jpg"
-                  alt=""
+                  src={pictureUrl ? pictureUrl : 'https://yt3.ggpht.com/a/AATXAJyAjXWhg85XlBUBufDpYQ7zB7GIiIlg9js4_wCoFA=s900-c-k-c0xffffffff-no-rj-mo'}
+                  alt="users' picture"
                />
             </div>
          </HeaderStyle>

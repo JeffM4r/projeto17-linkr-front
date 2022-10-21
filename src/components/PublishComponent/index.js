@@ -1,6 +1,7 @@
 import { useState } from "react";
 import publishPost from ".././services/Api.js"
-import { useRef } from "react";
+import { useRef,useContext } from "react";
+import UserContext from '../contexts/UserContext';
 import {
     Publishstyle,
     ImgBody,
@@ -21,6 +22,11 @@ export default function Publish() {
 
     const [link, setLink] = useState('')
     const [post, setPost] = useState('')
+
+    const {pictureUrl,setPictureUrl} = useContext(UserContext)
+    const localPictureUrl = localStorage.getItem('pictureUrl')
+    setPictureUrl(localPictureUrl)
+
 
     //desative buttons and area
     const [load, setload] = useState(false)
@@ -51,7 +57,7 @@ export default function Publish() {
     return (
         <Publishstyle>
             <ImgBody>
-                <PerfilImg src="http://pm1.narvii.com/7903/18ebcadf76c2bb8dac09d9078962c1a08ac1b111r1-512-512v2_uhq.jpg" />
+                <PerfilImg src={pictureUrl ? pictureUrl : 'https://yt3.ggpht.com/a/AATXAJyAjXWhg85XlBUBufDpYQ7zB7GIiIlg9js4_wCoFA=s900-c-k-c0xffffffff-no-rj-mo'} />
             </ImgBody>
 
             <Form>
