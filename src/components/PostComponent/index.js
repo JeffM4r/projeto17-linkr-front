@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { PostStyle } from "./style";
 import LinkPreview from "../PreviewLinkComponent";
 import hashtagInText from "../hashtagInText";
@@ -7,6 +8,8 @@ import { getMetaDados } from "../../services/linkr";
 import Edit from "../EditPostComponent/index";
 
 export default function Post({ username, picture, text, url, postId, userId }) {
+	const navigate = useNavigate()
+
 	const [postData, setPostData] = useState({});
 	const [editOn, setEditOn] = useState(false);
 
@@ -20,6 +23,10 @@ export default function Post({ username, picture, text, url, postId, userId }) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	function handleGoToUserPage () {
+		navigate(`/user/${userId}`);
+	}
+
 	return (
 		<>
 			{postData.description ? (
@@ -30,9 +37,9 @@ export default function Post({ username, picture, text, url, postId, userId }) {
 					</div>
 					<div>
 						<div>
-							<h3>{username}</h3>
+							<h3 onClick={handleGoToUserPage}>{username}</h3>
 						</div>
-						<div style={{ display: editOn ? "none" : "inherit" }}>
+						<div className="hashtag" style={{ display: editOn ? "none" : "inherit" }}>
 							{hashtagInText(text)}
 						</div>
 						<Edit editOn={editOn} />
