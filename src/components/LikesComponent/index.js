@@ -1,19 +1,13 @@
 import { IconDisliked, IconLiked } from "./style";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { postLike, deleteLike } from "../../services/linkr";
 
 export default function Likes({ postId }) {
 	const [liked, setLiked] = useState(false);
 	const token = localStorage.getItem("linkrUserToken");
 
 	function insertLike(id) {
-		const conf = {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		};
-		axios
-			.post(`http://localhost:4000/likes/${id}`, {}, conf)
+		postLike(id, token)
 			.then((resp) => {
 				console.log("worked");
 			})
@@ -22,14 +16,8 @@ export default function Likes({ postId }) {
 			});
 	}
 
-	function deleteLike(id) {
-		const conf = {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		};
-		axios
-			.delete(`http://localhost:4000/likes/${id}`, conf)
+	function dislike(id) {
+		deleteLike(id, token)
 			.then((resp) => {
 				console.log("worked");
 			})
@@ -51,7 +39,7 @@ export default function Likes({ postId }) {
 				<IconDisliked
 					onClick={() => {
 						setLiked(false);
-						deleteLike(postId);
+						dislike(postId);
 					}}
 				/>
 			)}
