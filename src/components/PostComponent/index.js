@@ -4,9 +4,12 @@ import LinkPreview from "../PreviewLinkComponent";
 import hashtagInText from "../hashtagInText";
 import Likes from "../LikesComponent";
 import { getMetaDados } from "../../services/linkr";
+import Edit from "../EditPostComponent/index";
 
 export default function Post({ username, picture, text, url, postId, userId }) {
 	const [postData, setPostData] = useState({});
+	const [editOn, setEditOn] = useState(false);
+
 	useEffect(() => {
 		getMetaDados(url)
 			.then((resp) => {
@@ -29,7 +32,10 @@ export default function Post({ username, picture, text, url, postId, userId }) {
 						<div>
 							<h3>{username}</h3>
 						</div>
-						<div>{hashtagInText(text)}</div>
+						<div style={{ display: editOn ? "none" : "inherit" }}>
+							{hashtagInText(text)}
+						</div>
+						<Edit editOn={editOn} />
 						<LinkPreview
 							title={postData.title}
 							description={postData.description}
