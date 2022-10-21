@@ -26,7 +26,6 @@ export const Container = styled.div`
 export const TrendsArea = styled.div`
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
   padding-top: 10px;
 
   div {
