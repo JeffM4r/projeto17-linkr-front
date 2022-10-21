@@ -8,9 +8,9 @@ function hashtagInText (text) {
   const Component = (<p>
     {
       splitText.map((element) => {
-        let rt = hashtagListFinded.map((hashtag, index) => {
+        let rt = hashtagListFinded.map((hashtag) => {
           if(element === hashtag) {
-            return (<HashtagComponent hashtag={hashtag} />)
+            return (<HashtagComponent hashtag={hashtag}/>)
           }
           return undefined;
         })

@@ -31,10 +31,10 @@ const TrendingComponent = () => {
       <h1>trending</h1>
       <TrendsArea>
         {
-          hashtagList.map((hashtag) => {
+          hashtagList.map((hashtag, index) => {
             return (
-              <div>
-                <HashtagComponent hashtag={hashtag.text} />
+              <div key={index}>
+                <HashtagComponent hashtag={hashtag.text}/>
               </div>
             )
           })
