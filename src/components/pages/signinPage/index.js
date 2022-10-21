@@ -15,7 +15,7 @@ import {
 const SignInPage = () => {
   const navigate = useNavigate()
 
-  const {setToken} = useContext(UserContext)
+  const {setToken,setPictureUrl} = useContext(UserContext)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -24,8 +24,11 @@ const SignInPage = () => {
   useEffect(() => {
     if(localStorage.getItem('linkrUserToken') !== null){
       const localToken = JSON.parse(localStorage.getItem('linkrUserToken'))
+      const localPictureUrl = JSON.parse(localStorage.getItem('pictureUrl'))
       setToken(localToken);
+      setPictureUrl(localPictureUrl)
       console.log(localToken)
+      console.log(localPictureUrl)
       navigate('/timeline');
     }
   }, [])
@@ -56,7 +59,9 @@ const SignInPage = () => {
     resp.then((resp) => {
       console.log(resp.data) 
       localStorage.setItem('linkrUserToken', JSON.stringify(resp.data.token))
+      localStorage.setItem('pictureUrl',JSON.stringify(resp.data.picture))
       setToken(resp.data.token) 
+      setPictureUrl(resp.data.picture)
       setIsLoading(false)
       navigate('/timeline')
     })
