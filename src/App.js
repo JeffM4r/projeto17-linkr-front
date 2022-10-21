@@ -9,20 +9,20 @@ import Timeline from "./components/pages/timelinePage";
 function App() {
 	const [token, setToken] = useState("");
 
-	return (
-		<>
-			<GlobalStyle />
-			<UserContext.Provider value={{ token, setToken }}>
-				<BrowserRouter>
-					<Routes>
-						<Route path="/" element={<SignInPage />} />
-						<Route path="/signup" element={<SignUpPage />} />
+  return (
+    <>
+      <GlobalStyle />
+      <UserContext.Provider value={{ token, setToken}}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<SignInPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
 						<Route path="/timeline" element={<Timeline />} />
-					</Routes>
-				</BrowserRouter>
-			</UserContext.Provider>
-		</>
-	);
+          </Routes>
+        </BrowserRouter>
+      </UserContext.Provider>
+    </>
+  );
 }
 
 export default App;
