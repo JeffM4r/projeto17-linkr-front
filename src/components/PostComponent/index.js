@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import { PostStyle } from "./style";
 import LinkPreview from "../PreviewLinkComponent";
 import hashtagInText from "../hashtagInText";
+import Likes from "../LikesComponent";
 
-export default function Post({ username, picture, text, url }) {
+export default function Post({ username, picture, text, url, postId, userId }) {
 	const [postData, setPostData] = useState({});
-
 	useEffect(() => {
 		mql(url, {
 			data: {
@@ -31,6 +31,7 @@ export default function Post({ username, picture, text, url }) {
 				<PostStyle>
 					<div>
 						<img src={picture} alt={`profile ${username}`} />
+						<Likes postId={postId} />
 					</div>
 					<div>
 						<div>

@@ -32,6 +32,8 @@ export default function Posts() {
 						picture={el.picture}
 						text={el.text}
 						url={el.url}
+						userId={el.userId}
+						postId={el.postId}
 						key={`key ${i}`}
 					/>
 				))
