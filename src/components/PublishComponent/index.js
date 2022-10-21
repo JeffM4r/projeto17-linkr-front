@@ -24,7 +24,7 @@ export default function Publish() {
     const [post, setPost] = useState('')
 
     const {pictureUrl,setPictureUrl} = useContext(UserContext)
-    const localPictureUrl = JSON.parse(localStorage.getItem('pictureUrl'))
+    const localPictureUrl = localStorage.getItem('pictureUrl')
     setPictureUrl(localPictureUrl)
 
 

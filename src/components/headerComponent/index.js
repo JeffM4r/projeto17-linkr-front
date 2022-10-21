@@ -25,8 +25,8 @@ const HeaderComponent = () => {
 
    useEffect(() => {
       if(localStorage.getItem('linkrUserToken') !== null){
-        const localToken = JSON.parse(localStorage.getItem('linkrUserToken'))
-        const localPictureUrl = JSON.parse(localStorage.getItem('pictureUrl'))
+        const localToken = localStorage.getItem('linkrUserToken')
+        const localPictureUrl = localStorage.getItem('pictureUrl')
         setToken(localToken);
         setPictureUrl(localPictureUrl)
         console.log(localToken)

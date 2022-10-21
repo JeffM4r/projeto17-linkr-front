@@ -23,8 +23,8 @@ const SignInPage = () => {
 
   useEffect(() => {
     if(localStorage.getItem('linkrUserToken') !== null){
-      const localToken = JSON.parse(localStorage.getItem('linkrUserToken'))
-      const localPictureUrl = JSON.parse(localStorage.getItem('pictureUrl'))
+      const localToken = localStorage.getItem('linkrUserToken')
+      const localPictureUrl = localStorage.getItem('pictureUrl')
       setToken(localToken);
       setPictureUrl(localPictureUrl)
       console.log(localToken)
@@ -58,8 +58,8 @@ const SignInPage = () => {
     })
     resp.then((resp) => {
       console.log(resp.data) 
-      localStorage.setItem('linkrUserToken', JSON.stringify(resp.data.token))
-      localStorage.setItem('pictureUrl',JSON.stringify(resp.data.picture))
+      localStorage.setItem('linkrUserToken', resp.data.token)
+      localStorage.setItem('pictureUrl',resp.data.picture)
       setToken(resp.data.token) 
       setPictureUrl(resp.data.picture)
       setIsLoading(false)
