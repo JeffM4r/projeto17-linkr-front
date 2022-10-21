@@ -25,6 +25,7 @@ export default function Posts() {
 			{posts.length !== 0 ? (
 				posts.map((el, i) => (
 					<Post
+						setPosts={setPosts}
 						username={el.name}
 						picture={el.picture}
 						text={el.text}
