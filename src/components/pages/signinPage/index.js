@@ -1,25 +1,25 @@
-import axios from 'axios';
-import { useState, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import UserContext from '../../contexts/UserContext';
-import InputComponent from '../../InputComponent';
+import axios from "axios";
+import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import UserContext from "../../contexts/UserContext";
+import InputComponent from "../../InputComponent";
 import {
-  Container,
-  Header,
-  SignInBody,
-  LoginButton,
-  DisableButton,
-  GoSignUpBtn
-} from './style';
+	Container,
+	Header,
+	SignInBody,
+	LoginButton,
+	DisableButton,
+	GoSignUpBtn,
+} from "./style";
 
 const SignInPage = () => {
-  const navigate = useNavigate()
+	const navigate = useNavigate();
 
   const {setToken,setPictureUrl} = useContext(UserContext)
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if(localStorage.getItem('linkrUserToken') !== null){
@@ -33,10 +33,10 @@ const SignInPage = () => {
     }
   }, [])
 
-  function signIn (body) {
-    const promise = axios.post('http://localhost:4000/signin', body)
-    return promise;
-  }
+	function signIn(body) {
+		const promise = axios.post("http://localhost:4000/signin", body);
+		return promise;
+	}
 
   async function handleSubmit (e) {
     setIsLoading(true)
@@ -65,43 +65,48 @@ const SignInPage = () => {
       setIsLoading(false)
       navigate('/timeline')
     })
-  }
+	}
 
-  return (
-    <Container>
-      <Header>
-        <div>
-          <h1>LINKR</h1>
-          <h2>save, share and discobery the best links on the web</h2>
-        </div>
-      </Header>
-      <SignInBody>
-        <form onSubmit={handleSubmit}>
-          <InputComponent 
-            placeholder="e-mail" 
-            value={email} 
-            setValue={setEmail} 
-            type='email'
-            required
-          />
-          <InputComponent 
-            placeholder="password" 
-            value={password} 
-            setValue={setPassword} 
-            type="password"
-            required
-          />
-          {
-            isLoading ?
-              <DisableButton>Log In</DisableButton>
-            :
-              <LoginButton>Log In</LoginButton>
-          }
-        </form>
-        <GoSignUpBtn onClick={() => {navigate('/signup')}}>First time? Create an account!</GoSignUpBtn>
-      </SignInBody>
-    </Container>
-  )
-}
+	return (
+		<Container>
+			<Header>
+				<div>
+					<h1>LINKR</h1>
+					<h2>save, share and discobery the best links on the web</h2>
+				</div>
+			</Header>
+			<SignInBody>
+				<form onSubmit={handleSubmit}>
+					<InputComponent
+						placeholder="e-mail"
+						value={email}
+						setValue={setEmail}
+						type="email"
+						required
+					/>
+					<InputComponent
+						placeholder="password"
+						value={password}
+						setValue={setPassword}
+						type="password"
+						required
+					/>
+					{isLoading ? (
+						<DisableButton>Log In</DisableButton>
+					) : (
+						<LoginButton>Log In</LoginButton>
+					)}
+				</form>
+				<GoSignUpBtn
+					onClick={() => {
+						navigate("/signup");
+					}}
+				>
+					First time? Create an account!
+				</GoSignUpBtn>
+			</SignInBody>
+		</Container>
+	);
+};
 
 export default SignInPage;
