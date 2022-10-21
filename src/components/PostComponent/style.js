@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { FaRegHeart, FaHeart } from "react-icons/fa";
 
 export const PostStyle = styled.div`
 	background-color: #171717;
@@ -64,11 +63,4 @@ export const PostStyle = styled.div`
 			}
 		}
 	}
-`;
-
-export const IconLiked = styled(FaRegHeart)`
-	color: #fff;
-`;
-export const IconDisliked = styled(FaHeart)`
-	color: #ad2b16;
 `;
