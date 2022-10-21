@@ -47,10 +47,11 @@ const SignInPage = () => {
     resp.catch((error) => {
       setIsLoading(false)
       console.log(error)
-      if(error.response.status === 401) alert('Usuario e/ou senha incorretos!')
-      else {
+      if(error.response.status === 401) {
+        return alert('Usuario e/ou senha incorretos!')
+      }else{
         alert('Ouve um erro inesperado!')
-      }
+      } 
     })
     resp.then((resp) => {
       console.log(resp.data) 
