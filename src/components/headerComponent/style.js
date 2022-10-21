@@ -11,6 +11,8 @@ export const HeaderStyle = styled.div`
    position: fixed;
    top:0px;
    left:0px;
+   z-index: 2000;
+   
    h2 {
       color: white;
       font-size: 49px;

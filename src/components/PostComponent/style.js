@@ -29,10 +29,21 @@ export const PostStyle = styled.div`
 	}
 
 	> div:nth-child(1) {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		font-size: 22px;
+
+		span {
+			font-size: 13px;
+			margin-top: 10px;
+		}
+
 		img {
 			height: 50px;
 			width: 50px;
 			border-radius: 50%;
+			margin-bottom: 16px;
 		}
 	}
 

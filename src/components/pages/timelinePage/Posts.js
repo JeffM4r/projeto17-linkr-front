@@ -1,17 +1,14 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Error from "../../ErrorComponent";
 import Post from "../../PostComponent";
+import { getAllRecentPosts } from "../../../services/linkr";
 
 export default function Posts() {
 	const [posts, setPosts] = useState([]);
 	const [disabled, setDisabled] = useState(false);
 
-	const BASE_URL = "http://localhost:4000";
-
 	useEffect(() => {
-		axios
-			.get(`${BASE_URL}/posts`)
+		getAllRecentPosts()
 			.then((resp) => {
 				const postsData = resp.data;
 				setPosts(postsData);
@@ -28,10 +25,12 @@ export default function Posts() {
 			{posts.length !== 0 ? (
 				posts.map((el, i) => (
 					<Post
-						username={el.username}
+						username={el.name}
 						picture={el.picture}
 						text={el.text}
 						url={el.url}
+						userId={el.userId}
+						postId={el.postId}
 						key={`key ${i}`}
 					/>
 				))

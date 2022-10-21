@@ -8,11 +8,12 @@ import Timeline from "./components/pages/timelinePage";
 
 function App() {
 	const [token, setToken] = useState("");
+  const [pictureUrl, setPictureUrl] = useState('')
 
   return (
     <>
       <GlobalStyle />
-      <UserContext.Provider value={{ token, setToken}}>
+      <UserContext.Provider value={{ token, setToken, pictureUrl, setPictureUrl}}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<SignInPage />} />
