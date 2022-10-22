@@ -6,7 +6,6 @@ import { getAllRecentPosts } from "../../../services/linkr";
 export default function Posts({ posts, setPosts }) {
 	const [disabled, setDisabled] = useState(false);
 	const token = localStorage.getItem("linkrUserToken");
-	console.log("videtoken" + token);
 
 	useEffect(() => {
 		getAllRecentPosts(token)

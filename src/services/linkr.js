@@ -48,6 +48,11 @@ function deleteLike(id, token) {
 	return promise;
 }
 
+function getNumLikes(id) {
+	const promise = axios.get(`${BASE_URL}/likes/${id}`);
+	return promise;
+}
+
 function signIn(body) {
 	const promise = axios.post(`"${BASE_URL}/signin`, body);
 	return promise;
@@ -80,4 +85,5 @@ export {
 	editPost,
 	publishPost,
 	getHastagPosts,
+	getNumLikes,
 };

@@ -33,19 +33,7 @@ export default function Post({
 		cursor: "pointer",
 	};
 
-	getMetaDados(url)
-		.then((resp) => {
-			const data = resp.data;
-			if (data.image == null) {
-				data.image = {
-					url: "https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png",
-				};
-			}
-			setPostData(data);
-		})
-		.catch((err) => console.error(err));
-
-	/* useEffect(() => {
+	useEffect(() => {
 		getMetaDados(url)
 			.then((resp) => {
 				const data = resp.data;
@@ -58,7 +46,7 @@ export default function Post({
 			})
 			.catch((err) => console.error(err));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []); */
+	}, []);
 
 	function handleGoToUserPage() {
 		navigate(`/user/${userId}`);

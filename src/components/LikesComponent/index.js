@@ -1,15 +1,28 @@
 import { IconDisliked, IconLiked } from "./style";
 import { useState, useEffect } from "react";
 import { postLike, deleteLike } from "../../services/linkr";
+import { getNumLikes } from "../../services/linkr";
 
 export default function Likes({ postId, likedAlready }) {
 	const [liked, setLiked] = useState(false);
+	const [likedBy, setLikedBy] = useState({ numLikes: 0 });
 	const token = localStorage.getItem("linkrUserToken");
 
 	useEffect(() => {
 		if (likedAlready) {
 			setLiked(true);
 		}
+
+		getNumLikes(postId)
+			.then((resp) => {
+				const numLikes = resp.data;
+				if (numLikes.numLikes) {
+					setLikedBy(numLikes);
+				}
+			})
+			.catch((err) => {
+				console.error(err);
+			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -50,7 +63,7 @@ export default function Likes({ postId, likedAlready }) {
 					}}
 				/>
 			)}
-			<span>13 likes</span>
+			<span>{likedBy.numLikes}</span>
 		</>
 	);
 }
