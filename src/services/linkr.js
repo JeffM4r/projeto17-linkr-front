@@ -31,8 +31,10 @@ function getAllRecentPosts(token) {
 	return promise;
 }
 
-function getHastagPosts(hashtag) {
-	const promise = axios.get(`${BASE_URL}/hashtags/#${hashtag}`);
+function getHastagPosts(hashtag,token) {
+	
+	const conf = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/hashtags/${hashtag}`, conf);
 	return promise;
 }
 
