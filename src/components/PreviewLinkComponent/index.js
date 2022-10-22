@@ -9,7 +9,15 @@ export default function LinkPreview({ title, description, url, image }) {
 				<span>{url}</span>
 			</div>
 			<div>
-				<img src={image} alt={"LinkPicture"} />
+				<img
+					src={image}
+					alt={"LinkPicture"}
+					onError={({ currentTarget }) => {
+						currentTarget.onerror = null;
+						currentTarget.src =
+							"https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png";
+					}}
+				/>
 			</div>
 		</Snippet>
 	);
