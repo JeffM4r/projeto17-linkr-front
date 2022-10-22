@@ -23,16 +23,15 @@ export const UserPosts = styled.div`
 		font-size: 43px;
 	}
 
-	img {
-		height: 50px;
-		width: 50px;
-		border-radius: 50%;
-		margin-bottom: 16px;
-	}
-
 	span {
 		display: flex;
 		flex-direction: row;
+		img {
+			height: 50px;
+			width: 50px;
+			border-radius: 50%;
+			margin-bottom: 16px;
+		}
 	}
 
 	@media (max-width: 614px) {
