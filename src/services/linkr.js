@@ -30,6 +30,11 @@ function getAllRecentPosts() {
    return promise;
 }
 
+function getHastagPosts(hashtag) {
+   const promise = axios.get(`${BASE_URL}/hashtags/#${hashtag}`);
+   return promise;
+}
+
 function postLike(id, token) {
    const conf = createHeaders(token);
    const promise = axios.post(`${BASE_URL}/likes/${id}`, {}, conf);
@@ -72,5 +77,6 @@ export {
    signIn,
    signUp,
    editPost,
-   publishPost
+   publishPost,
+   getHastagPosts
 };
