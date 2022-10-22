@@ -26,6 +26,19 @@ export default function Likes({ postId, likedAlready }) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	useEffect(() => {
+		getNumLikes(postId)
+			.then((resp) => {
+				const numLikes = resp.data;
+				if (numLikes.numLikes) {
+					setLikedBy(numLikes);
+				}else setLikedBy({ numLikes: 0 });
+			})
+			.catch((err) => {
+				console.error(err);
+			});
+	}, [liked])
+
 	function insertLike(id) {
 		postLike(id, token)
 			.then((resp) => {
@@ -51,15 +64,15 @@ export default function Likes({ postId, likedAlready }) {
 			{liked === false ? (
 				<IconLiked
 					onClick={() => {
-						setLiked(true);
 						insertLike(postId);
+						setLiked(true);
 					}}
 				/>
 			) : (
 				<IconDisliked
 					onClick={() => {
-						setLiked(false);
 						dislike(postId);
+						setLiked(false);
 					}}
 				/>
 			)}
