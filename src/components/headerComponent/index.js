@@ -37,7 +37,7 @@ const HeaderComponent = () => {
    return (
       <>
          <HeaderStyle>
-            <h2>linkr</h2>
+            <h2 onClick={() => navigate('/timeline')}>linkr</h2>
             <div onClick={() => setClicked(!clicked)}>
                <MdOutlineKeyboardArrowUp style={styleUp} />
                <MdOutlineKeyboardArrowDown style={styleDown} />

@@ -18,11 +18,13 @@ export const HeaderStyle = styled.div`
       font-size: 49px;
       font-family: "Passion One", cursive;
    }
+   h2:hover{
+      cursor: pointer;
+   }
    div {
       display: flex;
       cursor: pointer;
       align-items: center;
-      position: relative;
       img {
          border-radius: 50%;
          width: 53px;
@@ -36,7 +38,7 @@ export const LogoutStyle = styled.div`
     font-weight: 700;
     font-size: 17px;
     color: white;
-    position: absolute;
+    position: fixed;
     top: 70px;
     right: -20px;
     width: 150px;

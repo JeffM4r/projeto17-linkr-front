@@ -47,11 +47,13 @@ export default function Publish({setPosts}) {
          setload(false);
       });
       promise.then((res) => {
-         alert("Post publicado!");
+        //  alert("Post publicado!");
          console.log(infos);
          setClicked(false);
-         linkref.current.value = "";
-         postref.current.value = "";
+        //  linkref.current.value = "";
+        //  postref.current.value = "";
+         setUrl('')
+         setText('')
          getAllRecentPosts()
             .then((resp) => {
                const postsData = resp.data;
@@ -94,6 +96,12 @@ export default function Publish({setPosts}) {
                value={text}
                placeholder="Awesome article about #javascript"
                disabled={load}
+               onKeyDown={(e)=>{
+                if(e.code === 'Enter'){
+                    setClicked(true)
+                    HandleForm(e)
+                }
+               }}
             />
 
             <ButtonArea

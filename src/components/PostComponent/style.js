@@ -19,7 +19,11 @@ export const PostStyle = styled.div`
 		font-size: 19px;
 		margin-bottom: 8px;
 	}
-
+	h3:hover{
+		cursor:pointer;
+		text-decoration: underline;
+		text-decoration-thickness:1px;
+	}
 	p {
 		line-height: 19px;
 		display: flex;
