@@ -17,6 +17,7 @@ export default function Post({
 	userId,
 	setPosts,
 	owner,
+	likedAlready,
 }) {
 	const navigate = useNavigate();
 
@@ -52,7 +53,7 @@ export default function Post({
 				<PostStyle>
 					<div>
 						<img src={picture} alt={`profile ${username}`} />
-						<Likes postId={postId} />
+						<Likes postId={postId} likedAlready={likedAlready} />
 					</div>
 					<div>
 						<div>

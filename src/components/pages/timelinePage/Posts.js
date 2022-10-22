@@ -33,6 +33,7 @@ export default function Posts({ posts, setPosts }) {
 						userId={el.userId}
 						postId={el.postId}
 						owner={el.owner}
+						likedAlready={el.liked}
 						key={`key ${i}`}
 					/>
 				))
