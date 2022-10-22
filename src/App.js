@@ -6,6 +6,7 @@ import SignInPage from "./components/pages/signinPage";
 import SignUpPage from "./components/pages/signupPage";
 import Timeline from "./components/pages/timelinePage";
 import UserInfoPage from "./components/pages/userInfoPage";
+import HashtagPage from "./components/pages/hashtagPage"
 
 function App() {
 	const [token, setToken] = useState("");
@@ -21,6 +22,7 @@ function App() {
             <Route path="/signup" element={<SignUpPage />} />
 						<Route path="/timeline" element={<Timeline />} />
 						<Route path="/user/:id" element={<UserInfoPage />} />
+            <Route path="/hashtag/:hashtag" element={<HashtagPage/>} />
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>
