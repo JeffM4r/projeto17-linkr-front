@@ -5,7 +5,7 @@ import { getNumLikes } from "../../services/linkr";
 
 export default function Likes({ postId, likedAlready }) {
 	const [liked, setLiked] = useState(false);
-	const [likedBy, setLikedBy] = useState({ numLikes: 0 });
+	const [likedBy, setLikedBy] = useState({});
 	const token = localStorage.getItem("linkrUserToken");
 
 	useEffect(() => {
@@ -16,9 +16,7 @@ export default function Likes({ postId, likedAlready }) {
 		getNumLikes(postId)
 			.then((resp) => {
 				const numLikes = resp.data;
-				if (numLikes.numLikes) {
-					setLikedBy(numLikes);
-				}
+				setLikedBy(numLikes);
 			})
 			.catch((err) => {
 				console.error(err);
@@ -29,7 +27,7 @@ export default function Likes({ postId, likedAlready }) {
 	function insertLike(id) {
 		postLike(id, token)
 			.then((resp) => {
-				console.log("worked");
+				console.log("worked" + id);
 			})
 			.catch((err) => {
 				console.error(err);
@@ -39,7 +37,7 @@ export default function Likes({ postId, likedAlready }) {
 	function dislike(id) {
 		deleteLike(id, token)
 			.then((resp) => {
-				console.log("worked");
+				console.log("worked" + id);
 			})
 			.catch((err) => {
 				console.error(err);
@@ -63,7 +61,7 @@ export default function Likes({ postId, likedAlready }) {
 					}}
 				/>
 			)}
-			<span>{likedBy.numLikes}</span>
+			<span>{likedBy.numLikes ? likedBy.numLikes : 0}</span>
 		</>
 	);
 }

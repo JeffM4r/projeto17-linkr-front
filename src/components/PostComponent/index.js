@@ -25,6 +25,7 @@ export default function Post({
 	const [editOn, setEditOn] = useState(false);
 	const [inputText, setInputText] = useState(text);
 	const [disabled, setDisabled] = useState(false);
+	const [teste, setTeste] = useState(false);
 
 	const iconStyle = {
 		color: "white",
@@ -43,9 +44,9 @@ export default function Post({
 					};
 				}
 				setPostData(data);
+				setTeste(!teste);
 			})
 			.catch((err) => console.error(err));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	function handleGoToUserPage() {
