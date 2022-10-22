@@ -75,6 +75,12 @@ export default function publishPost(body, token) {
 	return promise;
 }
 
+function getUserInfo(userId, token) {
+	const conf = createHeaders(token);
+	const promise = axios.get(`http://localhost:4000/user/${userId}`, conf);
+	return promise;
+}
+
 export {
 	getAllRecentPosts,
 	getMetaDados,
@@ -86,4 +92,5 @@ export {
 	publishPost,
 	getHastagPosts,
 	getNumLikes,
+	getUserInfo,
 };

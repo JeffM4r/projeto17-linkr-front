@@ -57,7 +57,11 @@ export default function Post({
 			{postData.description ? (
 				<PostStyle>
 					<div>
-						<img src={picture} alt={`profile ${username}`} />
+						<img
+							src={picture}
+							alt={`profile ${username}`}
+							onClick={handleGoToUserPage}
+						/>
 						<Likes postId={postId} likedAlready={likedAlready} />
 					</div>
 					<div>

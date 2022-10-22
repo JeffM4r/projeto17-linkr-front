@@ -18,6 +18,9 @@ export const PostStyle = styled.div`
 		font-weight: 500;
 		font-size: 19px;
 		margin-bottom: 8px;
+		:hover {
+			cursor: pointer;
+		}
 	}
 
 	p {
@@ -27,7 +30,7 @@ export const PostStyle = styled.div`
 
 	> div:nth-child(2) {
 		width: calc(100% - 65px);
-		div{
+		div {
 			display: flex;
 			justify-content: space-between;
 		}
@@ -49,6 +52,9 @@ export const PostStyle = styled.div`
 			width: 50px;
 			border-radius: 50%;
 			margin-bottom: 16px;
+			:hover {
+				cursor: pointer;
+			}
 		}
 	}
 
