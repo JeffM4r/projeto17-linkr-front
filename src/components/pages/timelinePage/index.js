@@ -22,7 +22,9 @@ export default function Timeline() {
 							loadingFullPage ? <></> : <Posts posts={posts} setPosts={setPosts} setLoadingFullPage={setLoadingFullPage} />
 						}
 					</TimelinePage>
-					<TrendingComponent />
+					{
+							loadingFullPage ? <></> : <TrendingComponent />
+					}
 				</PageStyle>
 			</>
 	);
