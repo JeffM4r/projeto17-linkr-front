@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
 import Error from "../../ErrorComponent";
 import Post from "../../PostComponent";
-import { getAllRecentPosts } from "../../../services/linkr";
+import { getHastagPosts } from "../../../services/linkr";
 
-export default function Posts({ posts, setPosts }) {
+export default function Posts({ posts, setPosts, hashtag }) {
 	const [disabled, setDisabled] = useState(false);
 	const token = localStorage.getItem("linkrUserToken");
 
 	useEffect(() => {
-		getAllRecentPosts(token)
+		getHastagPosts(hashtag,token)
 			.then((resp) => {
 				const postsData = resp.data;
 				setPosts(postsData);
+				console.log( resp.data);
 			})
 			.catch((err) => {
 				console.error(err);

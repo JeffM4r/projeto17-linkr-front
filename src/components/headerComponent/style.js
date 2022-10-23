@@ -11,7 +11,7 @@ export const HeaderStyle = styled.div`
    position: fixed;
    top:0px;
    left:0px;
-   z-index: 2000;
+   z-index: 1000;
    
    h2 {
       color: white;
@@ -39,6 +39,7 @@ export const LogoutStyle = styled.div`
     font-size: 17px;
     color: white;
     position: fixed;
+    z-index: 2000;
     top: 70px;
     right: -20px;
     width: 150px;

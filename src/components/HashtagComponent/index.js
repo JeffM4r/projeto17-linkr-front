@@ -14,7 +14,7 @@ const HashtagComponent = ({hashtag}) => {
   const navigate = useNavigate()
 
   return (
-    <Hashtag onClick={() => {navigate(`/hashtag/${hashtag}`)}}> {hashtag} </Hashtag>
+    <Hashtag onClick={() => {navigate(`/hashtag/${hashtag.replace("#", "")}`); window.location.reload()}}> {hashtag} </Hashtag>
   )
 }
 

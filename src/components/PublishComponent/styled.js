@@ -12,7 +12,7 @@ const Publishstyle = styled.div`
     border-radius: 16px;
     background-color: white;
     position: relative;
-    z-index: 999;
+    z-index: 3;
     margin-bottom: 20px;
     @media (max-width: 614px) {
         width: 100vw;
@@ -24,7 +24,7 @@ const ImgBody = styled.div`
     width: 50px;
     height: 50px;
     margin-bottom: 120px;
-    margin-right: 20px;
+    margin-right: 35px;
 
     @media (max-width: 614px) {
     display: none;

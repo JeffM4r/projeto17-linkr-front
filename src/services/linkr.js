@@ -25,8 +25,16 @@ function getMetaDados(url) {
    return promise;
 }
 
-function getAllRecentPosts() {
-   const promise = axios.get(`${BASE_URL}/posts`);
+function getAllRecentPosts(token) {
+   const conf = createHeaders(token);
+   const promise = axios.get(`${BASE_URL}/posts`, conf);
+   return promise;
+}
+
+function getHastagPosts(hashtag, token) {
+
+   const conf = createHeaders(token);
+   const promise = axios.get(`${BASE_URL}/hashtags/${hashtag}`, conf);
    return promise;
 }
 
@@ -38,7 +46,12 @@ function postLike(id, token) {
 
 function deleteLike(id, token) {
    const conf = createHeaders(token);
-   const promise = axios.delete(`${BASE_URL}/likes/${id}`, {}, conf);
+   const promise = axios.delete(`${BASE_URL}/likes/${id}`, conf);
+   return promise;
+}
+
+function getNumLikes(id) {
+   const promise = axios.get(`${BASE_URL}/likes/${id}`);
    return promise;
 }
 
@@ -59,9 +72,30 @@ function editPost(postId, token, body) {
 }
 
 export default function publishPost(body, token) {
-	const conf = createHeaders(token);
-	const promise = axios.post(`${BASE_URL}/post`, body, conf);
-	return promise;
+   const conf = createHeaders(token);
+   const promise = axios.post(`${BASE_URL}/post`, body, conf);
+   return promise;
+}
+
+function deletePost(token, id) {
+   const conf = createHeaders(token);
+   const promise = axios.delete(`${BASE_URL}/post/${id}`, conf);
+   return promise;
+};
+
+function getUserInfo(userId, token) {
+   const conf = createHeaders(token);
+   const promise = axios.get(`http://localhost:4000/user/${userId}`, conf);
+   return promise;
+}
+
+function postHashtag(postId, hashtag) {
+   const body = {
+      postId,
+      hashtag
+   }
+   const promise = axios.post(`http://localhost:4000/hashtags`, body);
+   return promise;
 }
 
 export {
@@ -72,5 +106,10 @@ export {
    signIn,
    signUp,
    editPost,
-   publishPost
-};
+   publishPost,
+   getHastagPosts,
+   deletePost,
+   getNumLikes,
+   getUserInfo,
+   postHashtag
+}
