@@ -11,11 +11,12 @@ import HashtagPage from "./components/pages/hashtagPage"
 function App() {
 	const [token, setToken] = useState("");
   const [pictureUrl, setPictureUrl] = useState('')
+  const [openModal, setOpenModal] = useState(false)
 
   return (
     <>
       <GlobalStyle />
-      <UserContext.Provider value={{ token, setToken, pictureUrl, setPictureUrl}}>
+      <UserContext.Provider value={{ token, setToken, pictureUrl, setPictureUrl, openModal, setOpenModal}}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<SignInPage />} />

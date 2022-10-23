@@ -69,6 +69,12 @@ export default function publishPost(body, token) {
 	return promise;
 }
 
+function deletePost(token, id) {
+	const conf = createHeaders(token);
+	const promise = axios.delete(`${BASE_URL}/post/${id}`, conf);
+	return promise;
+}
+
 export {
    getAllRecentPosts,
    getMetaDados,
@@ -78,5 +84,6 @@ export {
    signUp,
    editPost,
    publishPost,
-   getHastagPosts
+   getHastagPosts, 
+   deletePost
 };
