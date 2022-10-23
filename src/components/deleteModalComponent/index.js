@@ -7,23 +7,22 @@ import {
     Modalzone
 
 } from "./style.js"
-import UserContext from "../contexts/UserContext";
-import { useContext } from "react";
 import { deletePost } from "../../services/linkr.js";
 
-export default function DeleteModal() {
-    const { setOpenModal } = useContext(UserContext)
+export default function DeleteModal({ id, setOpenDelModal, setLoadingFullPage }) {
     const token = localStorage.getItem("linkrUserToken");
 
     function postDelete() {
-        const promise = deletePost(token)
+        setLoadingFullPage(true)
+        const promise = deletePost(token, id)
         promise.catch((err) => {
             console.log(err)
-            setOpenModal(false)
-
+            setOpenDelModal(false)
+            setLoadingFullPage(false)
         })
         promise.then((resp) => {
-            setOpenModal(false)
+            setOpenDelModal(false)
+            setLoadingFullPage(false)
         })
     }
 
@@ -33,7 +32,7 @@ export default function DeleteModal() {
                 <TextConfirmation><p>Are you sure you want
                     to delete this post?</p></TextConfirmation>
                 <Buttonzone>
-                    <Backbutton onClick={() => { setOpenModal(false) }}>No, go back</Backbutton>
+                    <Backbutton onClick={() => { setOpenDelModal(false) }}>No, go back</Backbutton>
                     <Deletebutton onClick={() => { postDelete() }} >Yes, delete it</Deletebutton>
                 </Buttonzone>
             </Modalzone>

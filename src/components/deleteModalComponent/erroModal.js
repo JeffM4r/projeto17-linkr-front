@@ -21,5 +21,6 @@ export default function ErroModal() {
                     </Buttonzone>
                 </Modalzone>
             </WhiteArea> 
+        : <></>
     )
 }

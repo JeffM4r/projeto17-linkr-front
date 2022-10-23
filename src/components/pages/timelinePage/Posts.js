@@ -3,7 +3,7 @@ import Error from "../../ErrorComponent";
 import Post from "../../PostComponent";
 import { getAllRecentPosts } from "../../../services/linkr";
 
-export default function Posts({ posts, setPosts }) {
+export default function Posts({ posts, setPosts, setLoadingFullPage }) {
 	const [disabled, setDisabled] = useState(false);
 	const token = localStorage.getItem("linkrUserToken");
 
@@ -35,6 +35,7 @@ export default function Posts({ posts, setPosts }) {
 						owner={el.owner}
 						likedAlready={el.liked}
 						key={`key ${i}`}
+						setLoadingFullPage={setLoadingFullPage}
 					/>
 				))
 			) : (
