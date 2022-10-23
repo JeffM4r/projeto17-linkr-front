@@ -58,6 +58,7 @@ export default function Publish({ setPosts }) {
 					const postsData = res.data;
 					setPosts(postsData);
 					setRefrash(!refrash);
+					window.location.reload();
 				})
 				.catch((err) => {
 					console.error(err);
