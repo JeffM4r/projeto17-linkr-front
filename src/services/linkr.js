@@ -83,6 +83,15 @@ function getUserInfo(userId, token) {
 	return promise;
 }
 
+function postHashtag(postId, hashtag) {
+	const body = {
+		postId,
+		hashtag
+	}
+	const promise = axios.post(`http://localhost:4000/hashtags`, body);
+	return promise;
+}
+
 export {
 	getAllRecentPosts,
 	getMetaDados,
@@ -95,4 +104,5 @@ export {
 	getHastagPosts,
 	getNumLikes,
 	getUserInfo,
+	postHashtag
 };

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getAllRecentPosts, publishPost } from "../../services/linkr";
+import { getAllRecentPosts, publishPost, postHashtag } from "../../services/linkr";
 import { useRef, useContext } from "react";
 import UserContext from "../contexts/UserContext";
 import {
@@ -40,6 +40,9 @@ export default function Publish({ setPosts, setLoadingFullPage }) {
 			text,
 		};
 
+		const wordsArray = text.split(' ')
+
+
 		const promise = publishPost(infos, token);
 		promise.catch((res) => {
 			alert("Houve um erro ao publicar seu link");
@@ -54,6 +57,13 @@ export default function Publish({ setPosts, setLoadingFullPage }) {
 			linkref.current.value = "";
 			postref.current.value = "";
 			setLoadingFullPage(true)
+
+			wordsArray.forEach((word) => {
+				if(word.trim().startsWith('#')){
+					postHashtag(res.data.id, word).then((res)=>console.log(res))
+				}
+			});
+			
 			getAllRecentPosts(token)
 				.then((res) => {
 					const postsData = res.data;
