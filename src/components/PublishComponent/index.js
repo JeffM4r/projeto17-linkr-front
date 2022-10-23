@@ -15,7 +15,7 @@ import {
 	ButtonDesative,
 } from "./styled.js";
 
-export default function Publish({ setPosts }) {
+export default function Publish({ setPosts, setLoadingFullPage }) {
 	const linkref = useRef(null);
 	const postref = useRef(null);
 
@@ -27,7 +27,7 @@ export default function Publish({ setPosts }) {
 	const token = localStorage.getItem("linkrUserToken");
 	setPictureUrl(localPictureUrl);
 	const { refrash, setRefrash } = useContext(UserContext);
-
+	
 	//desative buttons and area
 	const [load, setload] = useState(false);
 	const [clicked, setClicked] = useState(false);
@@ -53,16 +53,20 @@ export default function Publish({ setPosts }) {
 			setClicked(false);
 			linkref.current.value = "";
 			postref.current.value = "";
+			setLoadingFullPage(true)
 			getAllRecentPosts(token)
 				.then((res) => {
 					const postsData = res.data;
 					setPosts(postsData);
 					setRefrash(!refrash);
-					window.location.reload();
+					setLoadingFullPage(false)
+					setUrl('')
+					setText('')
 				})
 				.catch((err) => {
 					console.error(err);
 					alert("Não foi possível salvar as alterações");
+					setLoadingFullPage(false)
 				});
 		});
 	}
