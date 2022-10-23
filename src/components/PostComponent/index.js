@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { PostStyle } from "./style";
 import LinkPreview from "../PreviewLinkComponent";
@@ -7,6 +7,7 @@ import Likes from "../LikesComponent";
 import { getMetaDados } from "../../services/linkr";
 import Edit from "../EditPostComponent/index";
 import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
+import UserContext from "../contexts/UserContext";
 
 export default function Post({
 	username,
@@ -20,7 +21,7 @@ export default function Post({
 	likedAlready,
 }) {
 	const navigate = useNavigate();
-
+	const { refrash } = useContext(UserContext);
 	const [postData, setPostData] = useState({});
 	const [editOn, setEditOn] = useState(false);
 	const [inputText, setInputText] = useState(text);
@@ -46,7 +47,7 @@ export default function Post({
 			})
 			.catch((err) => console.error(err));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [refrash]);
 
 	function handleGoToUserPage() {
 		navigate(`/user/${userId}`);

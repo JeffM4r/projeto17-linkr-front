@@ -26,6 +26,7 @@ export default function Publish({ setPosts }) {
 	const localPictureUrl = localStorage.getItem("pictureUrl");
 	const token = localStorage.getItem("linkrUserToken");
 	setPictureUrl(localPictureUrl);
+	const { refrash, setRefrash } = useContext(UserContext);
 
 	//desative buttons and area
 	const [load, setload] = useState(false);
@@ -53,9 +54,11 @@ export default function Publish({ setPosts }) {
 			linkref.current.value = "";
 			postref.current.value = "";
 			getAllRecentPosts(token)
-				.then((resp) => {
-					const postsData = resp.data;
+				.then((res) => {
+					const postsData = res.data;
 					setPosts(postsData);
+					setRefrash(!refrash);
+					window.location.reload();
 				})
 				.catch((err) => {
 					console.error(err);

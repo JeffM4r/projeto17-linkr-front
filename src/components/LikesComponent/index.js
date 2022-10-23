@@ -1,12 +1,14 @@
 import { IconDisliked, IconLiked } from "./style";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { postLike, deleteLike } from "../../services/linkr";
 import { getNumLikes } from "../../services/linkr";
+import UserContext from "../contexts/UserContext";
 
 export default function Likes({ postId, likedAlready }) {
 	const [liked, setLiked] = useState(false);
 	const [likedBy, setLikedBy] = useState({ numLikes: 0 });
 	const token = localStorage.getItem("linkrUserToken");
+	const { refrash, setRefrash } = useContext(UserContext);
 
 	useEffect(() => {
 		if (likedAlready) {
@@ -16,9 +18,7 @@ export default function Likes({ postId, likedAlready }) {
 		getNumLikes(postId)
 			.then((resp) => {
 				const numLikes = resp.data;
-				if (numLikes.numLikes) {
-					setLikedBy(numLikes);
-				}
+				setLikedBy(numLikes);
 			})
 			.catch((err) => {
 				console.error(err);
@@ -32,12 +32,12 @@ export default function Likes({ postId, likedAlready }) {
 				const numLikes = resp.data;
 				if (numLikes.numLikes) {
 					setLikedBy(numLikes);
-				}else setLikedBy({ numLikes: 0 });
+				} else setLikedBy({ numLikes: 0 });
 			})
 			.catch((err) => {
 				console.error(err);
 			});
-	}, [liked])
+	}, [liked]);
 
 	function insertLike(id) {
 		postLike(id, token)
@@ -66,6 +66,7 @@ export default function Likes({ postId, likedAlready }) {
 					onClick={() => {
 						insertLike(postId);
 						setLiked(true);
+						setRefrash(!refrash);
 					}}
 				/>
 			) : (
@@ -73,10 +74,11 @@ export default function Likes({ postId, likedAlready }) {
 					onClick={() => {
 						dislike(postId);
 						setLiked(false);
+						setRefrash(!refrash);
 					}}
 				/>
 			)}
-			<span>{likedBy.numLikes}</span>
+			<span>{likedBy.numLikes ? likedBy.numLikes : 0}</span>
 		</>
 	);
 }
