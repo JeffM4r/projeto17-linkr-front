@@ -24,7 +24,7 @@ const ImgBody = styled.div`
     width: 50px;
     height: 50px;
     margin-bottom: 120px;
-    margin-right: 20px;
+    margin-right: 35px;
 
     @media (max-width: 614px) {
     display: none;

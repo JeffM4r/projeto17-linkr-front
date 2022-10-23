@@ -4,7 +4,7 @@ import { PostStyle } from "./style";
 import LinkPreview from "../PreviewLinkComponent";
 import hashtagInText from "../hashtagInText";
 import Likes from "../LikesComponent";
-import { getMetaDados } from "../../services/linkr";
+import { deletePost, getMetaDados } from "../../services/linkr";
 import Edit from "../EditPostComponent/index";
 import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 import UserContext from "../contexts/UserContext";
@@ -27,6 +27,8 @@ export default function Post({
 	const [inputText, setInputText] = useState(text);
 	const [disabled, setDisabled] = useState(false);
 	const [likedAlreadi, setLikedAlreadi] = useState(likedAlready)
+
+	const { setOpenModal } = useContext(UserContext);
 
 	const iconStyle = {
 		color: "white",
@@ -81,7 +83,7 @@ export default function Post({
 											setEditOn(!editOn);
 										}}
 									/>
-									<FaTrashAlt style={iconStyle} />
+									<FaTrashAlt style={iconStyle} onClick={() => { setOpenModal(true) }} />
 								</div>
 							) : (
 								""
