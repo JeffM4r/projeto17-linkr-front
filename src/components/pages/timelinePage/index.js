@@ -7,6 +7,7 @@ import { useState } from 'react';
 
 export default function Timeline() {
 	const [posts, setPosts] = useState([]);
+	const [loadingFullPage, setLoadingFullPage] = useState(false)
 	return (
 		<>
 		<HeaderComponent />
@@ -15,8 +16,10 @@ export default function Timeline() {
 				<div>
 					<h2>timeline</h2>
 				</div>
-				<Publish setPosts={setPosts} />
-				<Posts posts={posts} setPosts={setPosts} />
+				<Publish setPosts={setPosts} setLoadingFullPage={setLoadingFullPage} />
+				{
+					loadingFullPage ? <></> : <Posts posts={posts} setPosts={setPosts} />
+				}
 			</TimelinePage>
 			<TrendingComponent />
 		</PageStyle>
