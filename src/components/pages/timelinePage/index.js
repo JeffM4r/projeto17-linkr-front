@@ -10,24 +10,28 @@ import UserContext from "../../contexts/UserContext";
 
 export default function Timeline() {
 	const [posts, setPosts] = useState([]);
+	const [loadingFullPage, setLoadingFullPage] = useState(false)
+
 	const { openModal } = useContext(UserContext)
 
 	return (
-		openModal ? <>
-			<DeleteModal />
-			
-			<HeaderComponent />
-			<PageStyle>
-				<TimelinePage>
-					<div>
-						<h2>timeline</h2>
-					</div>
-					<Publish setPosts={setPosts} />
-					<Posts posts={posts} setPosts={setPosts}></Posts>
-				</TimelinePage>
-				<TrendingComponent />
-			</PageStyle>
-		</>
+		openModal ?
+			<>
+				<DeleteModal />
+				<HeaderComponent />
+				<PageStyle>
+					<TimelinePage>
+						<div>
+							<h2>timeline</h2>
+						</div>
+						<Publish setPosts={setPosts} setLoadingFullPage={setLoadingFullPage} />
+						{
+							loadingFullPage ? <></> : <Posts posts={posts} setPosts={setPosts} />
+						}
+					</TimelinePage>
+					<TrendingComponent />
+				</PageStyle>
+			</>
 			:
 			<>
 				<HeaderComponent />
@@ -36,11 +40,14 @@ export default function Timeline() {
 						<div>
 							<h2>timeline</h2>
 						</div>
-						<Publish setPosts={setPosts} />
-						<Posts posts={posts} setPosts={setPosts} />
+						<Publish setPosts={setPosts} setLoadingFullPage={setLoadingFullPage} />
+						{
+							loadingFullPage ? <></> : <Posts posts={posts} setPosts={setPosts} />
+						}
 					</TimelinePage>
 					<TrendingComponent />
 				</PageStyle>
 			</>
+
 	);
 }

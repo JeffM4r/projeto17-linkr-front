@@ -3,11 +3,12 @@ import Error from "../../ErrorComponent";
 import Post from "../../PostComponent";
 import { getAllRecentPosts } from "../../../services/linkr";
 
-export default function Posts({posts,setPosts}) {
+export default function Posts({ posts, setPosts }) {
 	const [disabled, setDisabled] = useState(false);
+	const token = localStorage.getItem("linkrUserToken");
 
 	useEffect(() => {
-		getAllRecentPosts()
+		getAllRecentPosts(token)
 			.then((resp) => {
 				const postsData = resp.data;
 				setPosts(postsData);
@@ -31,6 +32,8 @@ export default function Posts({posts,setPosts}) {
 						url={el.url}
 						userId={el.userId}
 						postId={el.postId}
+						owner={el.owner}
+						likedAlready={el.liked}
 						key={`key ${i}`}
 					/>
 				))

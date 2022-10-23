@@ -16,7 +16,7 @@ export default function DeleteModal() {
     const token = localStorage.getItem("linkrUserToken");
 
     function postDelete() {
-        const promise = deletePost(token, id)
+        const promise = deletePost(token)
         promise.catch((err) => {
             console.log(err)
             setOpenModal(false)

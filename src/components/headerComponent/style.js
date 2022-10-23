@@ -36,7 +36,8 @@ export const LogoutStyle = styled.div`
     font-weight: 700;
     font-size: 17px;
     color: white;
-    position: absolute;
+    position: fixed;
+    z-index: 2000;
     top: 70px;
     right: -20px;
     width: 150px;

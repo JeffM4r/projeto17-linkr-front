@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { PostStyle } from "./style";
 import LinkPreview from "../PreviewLinkComponent";
@@ -16,14 +16,17 @@ export default function Post({
 	url,
 	postId,
 	userId,
-	setPosts
+	setPosts,
+	owner,
+	likedAlready
 }) {
-	const navigate = useNavigate()
-
+	const navigate = useNavigate();
+	const { refrash } = useContext(UserContext);
 	const [postData, setPostData] = useState({});
 	const [editOn, setEditOn] = useState(false);
 	const [inputText, setInputText] = useState(text);
 	const [disabled, setDisabled] = useState(false);
+	const [likedAlreadi, setLikedAlreadi] = useState(likedAlready)
 
 	const { setOpenModal } = useContext(UserContext);
 
@@ -34,16 +37,20 @@ export default function Post({
 		cursor: "pointer",
 	};
 
-
 	useEffect(() => {
 		getMetaDados(url)
 			.then((resp) => {
 				const data = resp.data;
+				if (data.image == null) {
+					data.image = {
+						url: "https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png",
+					};
+				}
 				setPostData(data);
 			})
 			.catch((err) => console.error(err));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [refrash]);
 
 	function handleGoToUserPage() {
 		navigate(`/user/${userId}`);
@@ -54,25 +61,33 @@ export default function Post({
 			{postData.description ? (
 				<PostStyle>
 					<div>
-						<img src={picture} alt={`profile ${username}`} />
-						<Likes postId={postId} />
+						<img
+							src={picture}
+							alt={`profile ${username}`}
+							onClick={handleGoToUserPage}
+						/>
+						<Likes postId={postId} likedAlready={likedAlreadi} setLikedAlready={setLikedAlreadi} />
 					</div>
 					<div>
 						<div>
 							<h3 onClick={handleGoToUserPage}>{username}</h3>
-							<div>
-								<FaPencilAlt
-									style={iconStyle}
-									onClick={() => {
-										if (!editOn) {
-											setInputText(text);
-											setDisabled(false);
-										}
-										setEditOn(!editOn);
-									}}
-								/>
-								<FaTrashAlt style={iconStyle} onClick={() => { setOpenModal(true) }} />
-							</div>
+							{owner ? (
+								<div>
+									<FaPencilAlt
+										style={iconStyle}
+										onClick={() => {
+											if (!editOn) {
+												setInputText(text);
+												setDisabled(false);
+											}
+											setEditOn(!editOn);
+										}}
+									/>
+									<FaTrashAlt style={iconStyle} onClick={() => { setOpenModal(true) }} />
+								</div>
+							) : (
+								""
+							)}
 						</div>
 						<div style={{ display: editOn ? "none" : "inherit" }}>
 							{hashtagInText(text)}
