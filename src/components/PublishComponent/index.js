@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom'
 import { getAllRecentPosts, publishPost } from "../../services/linkr";
 import { useRef, useContext } from "react";
 import UserContext from "../contexts/UserContext";
@@ -16,6 +17,8 @@ import {
 } from "./styled.js";
 
 export default function Publish({ setPosts }) {
+	const navigate = useNavigate()
+
 	const linkref = useRef(null);
 	const postref = useRef(null);
 
@@ -53,14 +56,13 @@ export default function Publish({ setPosts }) {
 			linkref.current.value = "";
 			postref.current.value = "";
 			getAllRecentPosts(token)
-				.then((resp) => {
-					const postsData = resp.data;
-					setPosts(postsData);
-				})
-				.catch((err) => {
-					console.error(err);
-					alert("Não foi possível salvar as alterações");
-				});
+			.then((resp) => {
+				const postsData = resp.data;
+				setPosts(postsData);
+			})
+			.catch((err) => {
+				console.error(err);
+			});
 		});
 	}
 
