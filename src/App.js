@@ -9,35 +9,38 @@ import UserInfoPage from "./components/pages/userInfoPage";
 import HashtagPage from "./components/pages/hashtagPage";
 
 function App() {
-	const [token, setToken] = useState("");
-	const [pictureUrl, setPictureUrl] = useState("");
-	const [refrash, setRefrash] = useState(false);
+  const [token, setToken] = useState("");
+  const [pictureUrl, setPictureUrl] = useState('')
+  const [openModal, setOpenModal] = useState(false)
+  const [refrash, setRefrash] = useState(false);
 
-	return (
-		<>
-			<GlobalStyle />
-			<UserContext.Provider
-				value={{
-					token,
-					setToken,
-					pictureUrl,
-					setPictureUrl,
-					refrash,
-					setRefrash,
-				}}
-			>
-				<BrowserRouter>
-					<Routes>
-						<Route path="/" element={<SignInPage />} />
-						<Route path="/signup" element={<SignUpPage />} />
-						<Route path="/timeline" element={<Timeline />} />
-						<Route path="/user/:id" element={<UserInfoPage />} />
-						<Route path="/hashtag/:hashtag" element={<HashtagPage />} />
-					</Routes>
-				</BrowserRouter>
-			</UserContext.Provider>
-		</>
-	);
+  return (
+    <>
+      <GlobalStyle />
+      <UserContext.Provider
+        value={{
+          token,
+          setToken,
+          pictureUrl,
+          setPictureUrl,
+          refrash,
+          setRefrash,
+          openModal,
+          setOpenModal
+        }}
+      >
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<SignInPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/timeline" element={<Timeline />} />
+            <Route path="/user/:id" element={<UserInfoPage />} />
+            <Route path="/hashtag/:hashtag" element={<HashtagPage />} />
+          </Routes>
+        </BrowserRouter>
+      </UserContext.Provider>
+    </>
+  );
 }
 
 export default App;
