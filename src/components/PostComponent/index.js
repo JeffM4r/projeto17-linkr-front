@@ -18,7 +18,7 @@ export default function Post({
 	userId,
 	setPosts,
 	owner,
-	likedAlready,
+	likedAlready
 }) {
 	const navigate = useNavigate();
 	const { refrash } = useContext(UserContext);
@@ -26,6 +26,7 @@ export default function Post({
 	const [editOn, setEditOn] = useState(false);
 	const [inputText, setInputText] = useState(text);
 	const [disabled, setDisabled] = useState(false);
+	const [likedAlreadi, setLikedAlreadi] = useState(likedAlready)
 
 	const iconStyle = {
 		color: "white",
@@ -63,7 +64,7 @@ export default function Post({
 							alt={`profile ${username}`}
 							onClick={handleGoToUserPage}
 						/>
-						<Likes postId={postId} likedAlready={likedAlready} />
+						<Likes postId={postId} likedAlready={likedAlreadi} setLikedAlready={setLikedAlreadi} />
 					</div>
 					<div>
 						<div>

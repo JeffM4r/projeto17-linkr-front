@@ -4,7 +4,7 @@ import { postLike, deleteLike } from "../../services/linkr";
 import { getNumLikes } from "../../services/linkr";
 import UserContext from "../contexts/UserContext";
 
-export default function Likes({ postId, likedAlready }) {
+export default function Likes({ postId, likedAlready, setLikedAlready }) {
 	const [liked, setLiked] = useState(false);
 	const [likedBy, setLikedBy] = useState({ numLikes: 0 });
 	const token = localStorage.getItem("linkrUserToken");
@@ -24,22 +24,10 @@ export default function Likes({ postId, likedAlready }) {
 				console.error(err);
 			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
-	useEffect(() => {
-		getNumLikes(postId)
-			.then((resp) => {
-				const numLikes = resp.data;
-				if (numLikes.numLikes) {
-					setLikedBy(numLikes);
-				} else setLikedBy({ numLikes: 0 });
-			})
-			.catch((err) => {
-				console.error(err);
-			});
 	}, [liked]);
 
 	function insertLike(id) {
+		setLikedAlready(true)
 		postLike(id, token)
 			.then((resp) => {
 				console.log("worked");
@@ -50,6 +38,7 @@ export default function Likes({ postId, likedAlready }) {
 	}
 
 	function dislike(id) {
+		setLikedAlready(false)
 		deleteLike(id, token)
 			.then((resp) => {
 				console.log("worked");
