@@ -11,6 +11,7 @@ import HashtagPage from "./components/pages/hashtagPage";
 function App() {
 	const [token, setToken] = useState("");
 	const [pictureUrl, setPictureUrl] = useState("");
+	const [refrash, setRefrash] = useState(false);
 
 	return (
 		<>
@@ -21,6 +22,8 @@ function App() {
 					setToken,
 					pictureUrl,
 					setPictureUrl,
+					refrash,
+					setRefrash,
 				}}
 			>
 				<BrowserRouter>
