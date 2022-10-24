@@ -1,4 +1,4 @@
-import { HeaderStyle, LogoutStyle, SearchUserStyle, SearchList } from "./style";
+import { HeaderStyle, LogoutStyle, SearchUserStyle, SearchList, InputStyle } from "./style";
 import {
    MdOutlineKeyboardArrowUp,
    MdOutlineKeyboardArrowDown,
@@ -106,6 +106,52 @@ function HeaderComponent({ setUserInfo, setLoading }) {
                />
             </div>
          </HeaderStyle>
+         <InputStyle>
+               <DebounceInput
+                  minLength={3}
+                  debounceTimeout={300}
+                  type="text"
+                  placeholder="Search for people"
+                  onChange={(e) => {
+                     if (e.target.value !== "") {
+                        searchUsers(e.target.value)
+                           .catch((err) => console.log(err))
+                           .then((res) => {
+                              setUsersList(res.data);
+                              console.log(res.data);
+                           });
+                     } else {
+                        setUsersList([]);
+                     }
+                  }}
+               />
+               <AiOutlineSearch style={styleSearch} />
+               <SearchList display={usersList.length === 0 ? "none" : "flex"}>
+                  {usersList.map((user, index) => (
+                     <SearchUserStyle
+                        key={index}
+                        onClick={() => {
+                           navigate(`/user/${user.id}`);
+                           setLoading(true);
+                           const promise = getUserInfo(user.id, token);
+                           promise.catch((error) => {
+                              console.log(error);
+                              setLoading(false);
+                           });
+                           promise.then((resp) => {
+                              setUserInfo(resp.data);
+                              console.log(resp.data);
+                              setLoading(false);
+                           });
+                           console.log(user.id);
+                        }}
+                     >
+                        <img src={user.picture} alt="user's image" />
+                        <h3>{user.name}</h3>
+                     </SearchUserStyle>
+                  ))}
+               </SearchList>
+            </InputStyle>
          <LogoutStyle
             onClick={() => {
                localStorage.clear();
