@@ -23,7 +23,6 @@ export default function Post({
 	setLoadingFullPage
 }) {
 	const navigate = useNavigate();
-
 	const { refrash } = useContext(UserContext);
 	const [postData, setPostData] = useState({});
 	const [editOn, setEditOn] = useState(false);

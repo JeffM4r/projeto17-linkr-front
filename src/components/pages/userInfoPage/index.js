@@ -23,12 +23,9 @@ const UserInfoPage = () => {
 		});
 		promise.then((resp) => {
 			setUserInfo(resp.data);
-			console.log(resp.data);
 			setLoading(false);
 		});
 	}, []);
-
-	console.log(userInfo);
 
 	return (
 		<Container>
