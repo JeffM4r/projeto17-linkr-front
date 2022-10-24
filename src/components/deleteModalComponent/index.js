@@ -12,6 +12,10 @@ import { deletePost } from "../../services/linkr.js";
 export default function DeleteModal({ id, setOpenDelModal, setLoadingFullPage }) {
     const token = localStorage.getItem("linkrUserToken");
 
+    function errorInfo() {
+        alert("Sorry, your post cannot be deleted...")
+    }
+
     function postDelete() {
         setLoadingFullPage(true)
         const promise = deletePost(token, id)
@@ -19,12 +23,15 @@ export default function DeleteModal({ id, setOpenDelModal, setLoadingFullPage })
             console.log(err)
             setOpenDelModal(false)
             setLoadingFullPage(false)
+            errorInfo()
         })
         promise.then((resp) => {
             setOpenDelModal(false)
             setLoadingFullPage(false)
         })
     }
+
+
 
     return (
         <WhiteArea>
