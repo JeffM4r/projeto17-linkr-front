@@ -22,7 +22,6 @@ export default function Likes({ postId, likedAlready, setLikedAlready }) {
 		getNumLikes(postId)
 			.then((resp) => {
 				const numLikes = resp.data;
-				console.log(numLikes)
 				setLikedBy(numLikes);
 			})
 			.catch((err) => {
@@ -36,7 +35,6 @@ export default function Likes({ postId, likedAlready, setLikedAlready }) {
 			.then((resp) => {
 				updateNumLike()
 				setLiked(true);
-				console.log("worked");
 			})
 			.catch((err) => {
 				console.error(err);
@@ -49,7 +47,6 @@ export default function Likes({ postId, likedAlready, setLikedAlready }) {
 			.then((resp) => {
 				updateNumLike()
 				setLiked(false);
-				console.log("worked");
 			})
 			.catch((err) => {
 				console.error(err);

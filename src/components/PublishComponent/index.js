@@ -52,7 +52,6 @@ export default function Publish({ setPosts, setLoadingFullPage }) {
 		});
 		promise.then((res) => {
 			alert("Post publicado!");
-			console.log(infos);
 			setClicked(false);
 			linkref.current.value = "";
 			postref.current.value = "";

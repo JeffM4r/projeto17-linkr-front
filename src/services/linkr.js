@@ -1,7 +1,7 @@
 import axios from "axios";
 import mql from "@microlink/mql";
 
-const BASE_URL = "http://localhost:4000";
+const BASE_URL = "https://xprojeto17-linkr.herokuapp.com";
 
 function createHeaders(token) {
    const config = {
@@ -85,7 +85,7 @@ function deletePost(token, id) {
 
 function getUserInfo(userId, token) {
    const conf = createHeaders(token);
-   const promise = axios.get(`http://localhost:4000/user/${userId}`, conf);
+   const promise = axios.get(`${BASE_URL}/user/${userId}`, conf);
    return promise;
 }
 
@@ -94,7 +94,7 @@ function postHashtag(postId, hashtag) {
       postId,
       hashtag
    }
-   const promise = axios.post(`http://localhost:4000/hashtags`, body);
+   const promise = axios.post(`${BASE_URL}/hashtags`, body);
    return promise;
 }
 

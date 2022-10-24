@@ -4,9 +4,9 @@ const WhiteArea = styled.div`
     margin: 0;
     padding: 0;
     width: 100vw;
-    height: 120vh;
+    height: 100vh;
     background: rgba(255, 255, 255, 0.7);
-    position: absolute;
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
