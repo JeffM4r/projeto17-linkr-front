@@ -75,3 +75,9 @@ export const PostStyle = styled.div`
 		}
 	}
 `;
+
+export const ModalZone = styled.div`
+	position: absolute;
+	left: 0;
+	top: 0;
+`
