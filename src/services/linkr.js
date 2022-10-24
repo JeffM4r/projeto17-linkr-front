@@ -98,6 +98,11 @@ function postHashtag(postId, hashtag) {
    return promise;
 }
 
+function searchUsers(username){
+   const promise = axios.get(`${BASE_URL}/search/${username}`)
+   return promise
+}
+
 export {
    getAllRecentPosts,
    getMetaDados,
@@ -111,5 +116,6 @@ export {
    deletePost,
    getNumLikes,
    getUserInfo,
-   postHashtag
+   postHashtag,
+   searchUsers
 }

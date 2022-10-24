@@ -38,7 +38,7 @@ export default function Edit({
                         setDisabled(false)
                      })
                      .then(() => {
-                        getAllRecentPosts()
+                        getAllRecentPosts(token)
                            .then((resp) => {
                               const postsData = resp.data;
                               //setPosts(postsData);
@@ -47,6 +47,7 @@ export default function Edit({
                            .catch((err) => {
                               console.error(err);
                               alert("Não foi possível salvar as alterações");
+                              setDisabled(false)
                            });
                      });
                }

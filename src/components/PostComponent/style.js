@@ -22,7 +22,11 @@ export const PostStyle = styled.div`
 			cursor: pointer;
 		}
 	}
-
+	h3:hover{
+		cursor:pointer;
+		text-decoration: underline;
+		text-decoration-thickness:1px;
+	}
 	p {
 		line-height: 19px;
 		display: flex;

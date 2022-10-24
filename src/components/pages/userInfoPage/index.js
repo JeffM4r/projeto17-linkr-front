@@ -32,7 +32,7 @@ const UserInfoPage = () => {
 
 	return (
 		<Container>
-			<HeaderComponent />
+			<HeaderComponent setLoading={setLoading} setUserInfo={setUserInfo} />
 			<UserPosts>
 				{loading ? (
 					<>Loading...</>

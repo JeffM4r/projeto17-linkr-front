@@ -93,25 +93,31 @@ export default function Publish({ setPosts, setLoadingFullPage }) {
 				/>
 			</ImgBody>
 
-			<Form>
-				<WhatToday>What are you going to share today?</WhatToday>
-				<Inputlink
-					type="text"
-					ref={linkref}
-					onChange={(e) => setUrl(e.target.value)}
-					value={url}
-					placeholder="http://..."
-					required
-					disabled={load}
-				/>
-				<Inputpost
-					type="text"
-					ref={postref}
-					onChange={(e) => setText(e.target.value)}
-					value={text}
-					placeholder="Awesome article about #javascript"
-					disabled={load}
-				/>
+         <Form>
+            <WhatToday>What are you going to share today?</WhatToday>
+            <Inputlink
+               type="text"
+               ref={linkref}
+               onChange={(e) => setUrl(e.target.value)}
+               value={url}
+               placeholder="http://..."
+               required
+               disabled={load}
+            />
+            <Inputpost
+               type="text"
+               ref={postref}
+               onChange={(e) => setText(e.target.value)}
+               value={text}
+               placeholder="Awesome article about #javascript"
+               disabled={load}
+               onKeyDown={(e)=>{
+                if(e.code === 'Enter'){
+                    setClicked(true)
+                    HandleForm(e)
+                }
+               }}
+            />
 
 				<ButtonArea
 					onClick={() => {
