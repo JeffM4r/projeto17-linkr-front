@@ -1,6 +1,6 @@
 import { editPost, getAllRecentPosts } from "../../services/linkr";
 import EditPost from "./style";
-import { useContext } from "react";
+import { useContext,useRef, useEffect } from "react";
 import UserContext from "../contexts/UserContext";
 
 export default function Edit({
@@ -13,6 +13,10 @@ export default function Edit({
    postId,
    setPosts,
 }) {
+   const editInput = useRef(null)
+   useEffect(() =>{
+      editInput.current.focus()
+   },[editOn])
    const { setToken, token } = useContext(UserContext);
    const localToken = localStorage.getItem("linkrUserToken");
    setToken(localToken);
@@ -20,6 +24,7 @@ export default function Edit({
    return (
       <EditPost style={{ display: editOn ? "inherit" : "none" }}>
          <input
+            ref={editInput}
             type="text"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
