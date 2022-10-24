@@ -11,25 +11,31 @@ export default function Likes({ postId, likedAlready, setLikedAlready }) {
 	const { refrash, setRefrash } = useContext(UserContext);
 
 	useEffect(() => {
-		if (likedAlready) {
-			setLiked(true);
-		}
 
+		setLiked(likedAlready);
+
+		updateNumLike()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	function updateNumLike () {
 		getNumLikes(postId)
 			.then((resp) => {
 				const numLikes = resp.data;
+				console.log(numLikes)
 				setLikedBy(numLikes);
 			})
 			.catch((err) => {
 				console.error(err);
 			});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [liked]);
+	}
 
 	function insertLike(id) {
 		setLikedAlready(true)
 		postLike(id, token)
 			.then((resp) => {
+				updateNumLike()
+				setLiked(true);
 				console.log("worked");
 			})
 			.catch((err) => {
@@ -41,6 +47,8 @@ export default function Likes({ postId, likedAlready, setLikedAlready }) {
 		setLikedAlready(false)
 		deleteLike(id, token)
 			.then((resp) => {
+				updateNumLike()
+				setLiked(false);
 				console.log("worked");
 			})
 			.catch((err) => {
@@ -50,19 +58,17 @@ export default function Likes({ postId, likedAlready, setLikedAlready }) {
 
 	return (
 		<>
-			{liked === false ? (
+			{liked ? (
 				<IconLiked
 					onClick={() => {
-						insertLike(postId);
-						setLiked(true);
+						dislike(postId);
 						setRefrash(!refrash);
 					}}
 				/>
 			) : (
 				<IconDisliked
 					onClick={() => {
-						dislike(postId);
-						setLiked(false);
+						insertLike(postId);
 						setRefrash(!refrash);
 					}}
 				/>

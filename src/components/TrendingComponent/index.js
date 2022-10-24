@@ -22,7 +22,6 @@ const TrendingComponent = () => {
     })
     promise.then((resp) => {
       setHashtagList(resp.data)
-      console.log("trending:" + resp.data)
     })
   }, [])
 
