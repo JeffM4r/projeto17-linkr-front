@@ -10,10 +10,57 @@ export const SearchList = styled.span`
    background-color: #e7e7e7;
    top: 52px;
    position: fixed;
-   z-index: -1;
+   z-index: 10;
    border-bottom-right-radius: 8px;
    border-bottom-left-radius: 8px;
+   @media (max-width: 614px) {
+      position: absolute;
+		top: 38px;
+      width: 91vw;
+	}
+   @media (max-width:400px){
+      width: 85vw;
+   }
 `;
+
+export const InputStyle = styled.div`
+position: absolute;
+top: 85px;
+left: 15px;
+input {
+         outline: none;
+         border: none;
+         width: 91vw;
+         height: 45px;
+         border-radius: 8px;
+         padding-left: 10px;
+         font-size: 20px;
+         z-index: 13;
+      }
+      input::placeholder {
+         color: #c6c6c6;
+         font-size: 19px;
+      }
+      input:focus::placeholder {
+         color: transparent;
+      }
+   h2 {
+      color: white;
+      font-size: 49px;
+      font-family: "Passion One", cursive;
+   }
+   h2:hover {
+      cursor: pointer;
+   }
+   @media (max-width: 400px) {
+			input{
+            width: 85vw;
+         };
+	}
+   @media (min-width:614px){
+      display: none;
+   }
+`
 
 export const HeaderStyle = styled.div`
    background-color: #151515;
@@ -27,6 +74,11 @@ export const HeaderStyle = styled.div`
    top: 0px;
    left: 0px;
    z-index: 1000;
+   @media (max-width:614px) {
+      div:nth-child(2){
+         display: none;
+      }
+   }
    div:nth-child(2) {
       position: relative;
       input {
