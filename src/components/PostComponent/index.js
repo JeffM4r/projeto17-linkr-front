@@ -4,10 +4,11 @@ import { PostStyle } from "./style";
 import LinkPreview from "../PreviewLinkComponent";
 import hashtagInText from "../hashtagInText";
 import Likes from "../LikesComponent";
-import { deletePost, getMetaDados } from "../../services/linkr";
+import { getMetaDados } from "../../services/linkr";
 import Edit from "../EditPostComponent/index";
 import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 import UserContext from "../contexts/UserContext";
+import DeleteModal from "../deleteModalComponent";
 
 export default function Post({
 	username,
@@ -18,9 +19,11 @@ export default function Post({
 	userId,
 	setPosts,
 	owner,
-	likedAlready
+	likedAlready,
+	setLoadingFullPage
 }) {
 	const navigate = useNavigate();
+
 	const { refrash } = useContext(UserContext);
 	const [postData, setPostData] = useState({});
 	const [editOn, setEditOn] = useState(false);
@@ -28,7 +31,7 @@ export default function Post({
 	const [disabled, setDisabled] = useState(false);
 	const [likedAlreadi, setLikedAlreadi] = useState(likedAlready)
 
-	const { setOpenModal } = useContext(UserContext);
+	const [openDelModal, setOpenDelModal] = useState(false)
 
 	const iconStyle = {
 		color: "white",
@@ -57,6 +60,9 @@ export default function Post({
 	}
 
 	return (
+		openDelModal ? 
+			<DeleteModal setOpenDelModal={setOpenDelModal} id={postId} setLoadingFullPage={setLoadingFullPage} />
+		:
 		<>
 			{postData.description ? (
 				<PostStyle>
@@ -83,7 +89,7 @@ export default function Post({
 											setEditOn(!editOn);
 										}}
 									/>
-									<FaTrashAlt style={iconStyle} onClick={() => { setOpenModal(true) }} />
+									<FaTrashAlt style={iconStyle} onClick={() => { setOpenDelModal(true) }} />
 								</div>
 							) : (
 								""

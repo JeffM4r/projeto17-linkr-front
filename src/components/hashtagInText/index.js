@@ -7,10 +7,10 @@ function hashtagInText (text) {
 
   const Component = (<p>
     {
-      splitText.map((element) => {
+      splitText.map((element, ind) => {
         let rt = hashtagListFinded.map((hashtag) => {
           if(element === hashtag) {
-            return (<HashtagComponent hashtag={hashtag}/>)
+            return (<HashtagComponent hashtag={hashtag} key={ind} />)
           }
           return undefined;
         })
