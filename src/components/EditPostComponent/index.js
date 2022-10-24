@@ -41,7 +41,7 @@ export default function Edit({
                         getAllRecentPosts(token)
                            .then((resp) => {
                               const postsData = resp.data;
-                              setPosts(postsData);
+                              //setPosts(postsData);
                               setEditOn(false);
                            })
                            .catch((err) => {
