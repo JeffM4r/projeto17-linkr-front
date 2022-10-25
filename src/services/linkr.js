@@ -79,7 +79,7 @@ export default function publishPost(body, token) {
 
 function getUserInfo(userId, token) {
 	const conf = createHeaders(token);
-	const promise = axios.get(`http://localhost:4000/user/${userId}`, conf);
+	const promise = axios.get(`${BASE_URL}/user/${userId}`, conf);
 	return promise;
 }
 
