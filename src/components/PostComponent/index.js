@@ -9,6 +9,7 @@ import Edit from "../EditPostComponent/index";
 import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 import UserContext from "../contexts/UserContext";
 import DeleteModal from "../deleteModalComponent";
+import { ShareButton } from "../ShareComponet";
 
 export default function Post({
 	username,
@@ -74,6 +75,7 @@ export default function Post({
 								onClick={handleGoToUserPage}
 							/>
 							<Likes postId={postId} likedAlready={likedAlreadi} setLikedAlready={setLikedAlreadi} />
+							<ShareButton />
 						</div>
 						<div>
 							<div>
