@@ -1,10 +1,5 @@
 import { useState } from "react";
-<<<<<<< HEAD
-import { useNavigate } from 'react-router-dom'
-import { getAllRecentPosts, publishPost } from "../../services/linkr";
-=======
 import { getAllRecentPosts, publishPost, postHashtag } from "../../services/linkr";
->>>>>>> main
 import { useRef, useContext } from "react";
 import UserContext from "../contexts/UserContext";
 import {
@@ -20,13 +15,7 @@ import {
 	ButtonDesative,
 } from "./styled.js";
 
-<<<<<<< HEAD
-export default function Publish({ setPosts }) {
-	const navigate = useNavigate()
-
-=======
 export default function Publish({ setPosts, setLoadingFullPage }) {
->>>>>>> main
 	const linkref = useRef(null);
 	const postref = useRef(null);
 
@@ -75,15 +64,6 @@ export default function Publish({ setPosts, setLoadingFullPage }) {
 			});
 			
 			getAllRecentPosts(token)
-<<<<<<< HEAD
-			.then((resp) => {
-				const postsData = resp.data;
-				setPosts(postsData);
-			})
-			.catch((err) => {
-				console.error(err);
-			});
-=======
 				.then((res) => {
 					const postsData = res.data;
 					setPosts(postsData);
@@ -97,7 +77,6 @@ export default function Publish({ setPosts, setLoadingFullPage }) {
 					alert("Não foi possível salvar as alterações");
 					setLoadingFullPage(false)
 				});
->>>>>>> main
 		});
 	}
 

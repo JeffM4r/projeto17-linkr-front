@@ -32,7 +32,8 @@ const SignInPage = () => {
   }, [])
 
 	function signIn(body) {
-		const promise = axios.post("https://xprojeto17-linkr.herokuapp.com/signin", body);
+		//const promise = axios.post("https://xprojeto17-linkr.herokuapp.com/signin", body);
+		const promise = axios.post("http://localhost:4000/signin", body);
 		return promise;
 	}
 

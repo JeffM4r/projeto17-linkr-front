@@ -1,15 +1,24 @@
 import { useState, useEffect } from "react";
 import Error from "../../ErrorComponent";
 import Post from "../../PostComponent";
+import { getAllRecentPosts } from "../../../services/linkr";
 
-<<<<<<< HEAD
-=======
 export default function Posts({ posts, setPosts, setLoadingFullPage }) {
 	const [disabled, setDisabled] = useState(false);
 	const token = localStorage.getItem("linkrUserToken");
->>>>>>> main
 
-export default function Posts({ posts, setPosts, disabled }) {
+	useEffect(() => {
+		getAllRecentPosts(token)
+			.then((resp) => {
+				const postsData = resp.data;
+				setPosts(postsData);
+			})
+			.catch((err) => {
+				console.error(err);
+				setDisabled(true);
+			});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<>

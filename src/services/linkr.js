@@ -1,7 +1,8 @@
 import axios from "axios";
 import mql from "@microlink/mql";
 
-const BASE_URL = "https://xprojeto17-linkr.herokuapp.com";
+//const BASE_URL = "https://xprojeto17-linkr.herokuapp.com";
+const BASE_URL = "http://localhost:4000";
 
 function createHeaders(token) {
    const config = {
@@ -50,8 +51,9 @@ function deleteLike(id, token) {
    return promise;
 }
 
-function getNumLikes(id) {
-   const promise = axios.get(`${BASE_URL}/likes/${id}`);
+function getNumLikes(id, token) {
+   const conf = createHeaders(token);
+   const promise = axios.get(`${BASE_URL}/likes/${id}`, conf);
    return promise;
 }
 
