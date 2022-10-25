@@ -33,7 +33,8 @@ const SignUpPage = () => {
     }
 
     function signUp(cadastro) {
-        const promise = axios.post(`https://xprojeto17-linkr.herokuapp.com/signup`, cadastro);
+        //const promise = axios.post(`https://xprojeto17-linkr.herokuapp.com/signup`, cadastro);
+        const promise = axios.post(`http://localhost:4000/signup`, cadastro);
         return promise;
     } 
     
