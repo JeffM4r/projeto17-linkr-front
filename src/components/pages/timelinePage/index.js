@@ -8,6 +8,7 @@ import { getAllRecentPosts } from "../../../services/linkr";
 
 export default function Timeline() {
 	const [posts, setPosts] = useState([]);
+<<<<<<< HEAD
 	const [disabled, setDisabled] = useState(false);
 	const token = localStorage.getItem("linkrUserToken");
 
@@ -39,5 +40,27 @@ export default function Timeline() {
 		</PageStyle>
 		</>
 		
+=======
+	const [loadingFullPage, setLoadingFullPage] = useState(false)
+
+	return (
+			<>
+				<HeaderComponent />
+				<PageStyle>
+					<TimelinePage>
+						<div>
+							<h2>timeline</h2>
+						</div>
+						<Publish setPosts={setPosts} setLoadingFullPage={setLoadingFullPage} />
+						{
+							loadingFullPage ? <></> : <Posts posts={posts} setPosts={setPosts} setLoadingFullPage={setLoadingFullPage} />
+						}
+					</TimelinePage>
+					{
+							loadingFullPage ? <></> : <TrendingComponent />
+					}
+				</PageStyle>
+			</>
+>>>>>>> main
 	);
 }

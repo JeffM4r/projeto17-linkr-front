@@ -14,7 +14,7 @@ export const TimelinePage = styled.div`
 	width: 100%;
 	max-width: 700px;
 	color: white;
-	margin: 125px 0 0 0;
+	margin: 140px 0 0 0;
 
 	h2 {
 		font-family: "Oswald", sans-serif;

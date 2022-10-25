@@ -23,16 +23,13 @@ const UserInfoPage = () => {
 		});
 		promise.then((resp) => {
 			setUserInfo(resp.data);
-			console.log(resp.data);
 			setLoading(false);
 		});
 	}, []);
 
-	console.log(userInfo);
-
 	return (
 		<Container>
-			<HeaderComponent />
+			<HeaderComponent setLoading={setLoading} setUserInfo={setUserInfo} />
 			<UserPosts>
 				{loading ? (
 					<>Loading...</>

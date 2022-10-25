@@ -27,14 +27,12 @@ const SignInPage = () => {
       const localPictureUrl = localStorage.getItem('pictureUrl')
       setToken(localToken);
       setPictureUrl(localPictureUrl)
-      console.log(localToken)
-      console.log(localPictureUrl)
       navigate('/timeline');
     }
   }, [])
 
 	function signIn(body) {
-		const promise = axios.post("http://localhost:4000/signin", body);
+		const promise = axios.post("https://xprojeto17-linkr.herokuapp.com/signin", body);
 		return promise;
 	}
 
@@ -57,7 +55,6 @@ const SignInPage = () => {
       } 
     })
     resp.then((resp) => {
-      console.log(resp.data) 
       localStorage.setItem('linkrUserToken', resp.data.token)
       localStorage.setItem('pictureUrl',resp.data.picture)
       setToken(resp.data.token) 

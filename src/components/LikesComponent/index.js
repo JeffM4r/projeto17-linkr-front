@@ -1,48 +1,40 @@
 import { IconDisliked, IconLiked } from "./style";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { postLike, deleteLike } from "../../services/linkr";
 import { getNumLikes } from "../../services/linkr";
+import UserContext from "../contexts/UserContext";
 
-export default function Likes({ postId, likedAlready }) {
+export default function Likes({ postId, likedAlready, setLikedAlready }) {
 	const [liked, setLiked] = useState(false);
 	const [likedBy, setLikedBy] = useState({ numLikes: 0 });
 	const token = localStorage.getItem("linkrUserToken");
+	const { refrash, setRefrash } = useContext(UserContext);
 
 	useEffect(() => {
-		if (likedAlready) {
-			setLiked(true);
-		}
 
-		getNumLikes(postId)
-			.then((resp) => {
-				const numLikes = resp.data;
-				if (numLikes.numLikes) {
-					setLikedBy(numLikes);
-				}
-			})
-			.catch((err) => {
-				console.error(err);
-			});
+		setLiked(likedAlready);
+
+		updateNumLike()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	useEffect(() => {
+	function updateNumLike () {
 		getNumLikes(postId)
 			.then((resp) => {
 				const numLikes = resp.data;
-				if (numLikes.numLikes) {
-					setLikedBy(numLikes);
-				}else setLikedBy({ numLikes: 0 });
+				setLikedBy(numLikes);
 			})
 			.catch((err) => {
 				console.error(err);
 			});
-	}, [liked])
+	}
 
 	function insertLike(id) {
+		setLikedAlready(true)
 		postLike(id, token)
 			.then((resp) => {
-				console.log("worked");
+				updateNumLike()
+				setLiked(true);
 			})
 			.catch((err) => {
 				console.error(err);
@@ -50,9 +42,11 @@ export default function Likes({ postId, likedAlready }) {
 	}
 
 	function dislike(id) {
+		setLikedAlready(false)
 		deleteLike(id, token)
 			.then((resp) => {
-				console.log("worked");
+				updateNumLike()
+				setLiked(false);
 			})
 			.catch((err) => {
 				console.error(err);
@@ -61,22 +55,22 @@ export default function Likes({ postId, likedAlready }) {
 
 	return (
 		<>
-			{liked === false ? (
+			{liked ? (
 				<IconLiked
 					onClick={() => {
-						insertLike(postId);
-						setLiked(true);
+						dislike(postId);
+						setRefrash(!refrash);
 					}}
 				/>
 			) : (
 				<IconDisliked
 					onClick={() => {
-						dislike(postId);
-						setLiked(false);
+						insertLike(postId);
+						setRefrash(!refrash);
 					}}
 				/>
 			)}
-			<span>{likedBy.numLikes}</span>
+			<span>{likedBy.numLikes ? likedBy.numLikes : 0}</span>
 		</>
 	);
 }

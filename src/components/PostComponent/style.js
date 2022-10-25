@@ -22,7 +22,11 @@ export const PostStyle = styled.div`
 			cursor: pointer;
 		}
 	}
-
+	h3:hover{
+		cursor:pointer;
+		text-decoration: underline;
+		text-decoration-thickness:1px;
+	}
 	p {
 		line-height: 19px;
 		display: flex;
@@ -75,3 +79,9 @@ export const PostStyle = styled.div`
 		}
 	}
 `;
+
+export const ModalZone = styled.div`
+	position: absolute;
+	left: 0;
+	top: 0;
+`

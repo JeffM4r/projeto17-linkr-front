@@ -1,6 +1,10 @@
 import { useState } from "react";
+<<<<<<< HEAD
 import { useNavigate } from 'react-router-dom'
 import { getAllRecentPosts, publishPost } from "../../services/linkr";
+=======
+import { getAllRecentPosts, publishPost, postHashtag } from "../../services/linkr";
+>>>>>>> main
 import { useRef, useContext } from "react";
 import UserContext from "../contexts/UserContext";
 import {
@@ -16,9 +20,13 @@ import {
 	ButtonDesative,
 } from "./styled.js";
 
+<<<<<<< HEAD
 export default function Publish({ setPosts }) {
 	const navigate = useNavigate()
 
+=======
+export default function Publish({ setPosts, setLoadingFullPage }) {
+>>>>>>> main
 	const linkref = useRef(null);
 	const postref = useRef(null);
 
@@ -29,7 +37,8 @@ export default function Publish({ setPosts }) {
 	const localPictureUrl = localStorage.getItem("pictureUrl");
 	const token = localStorage.getItem("linkrUserToken");
 	setPictureUrl(localPictureUrl);
-
+	const { refrash, setRefrash } = useContext(UserContext);
+	
 	//desative buttons and area
 	const [load, setload] = useState(false);
 	const [clicked, setClicked] = useState(false);
@@ -42,6 +51,9 @@ export default function Publish({ setPosts }) {
 			text,
 		};
 
+		const wordsArray = text.split(' ')
+
+
 		const promise = publishPost(infos, token);
 		promise.catch((res) => {
 			alert("Houve um erro ao publicar seu link");
@@ -51,11 +63,19 @@ export default function Publish({ setPosts }) {
 		});
 		promise.then((res) => {
 			alert("Post publicado!");
-			console.log(infos);
 			setClicked(false);
 			linkref.current.value = "";
 			postref.current.value = "";
+			setLoadingFullPage(true)
+
+			wordsArray.forEach((word) => {
+				if(word.trim().startsWith('#')){
+					postHashtag(res.data.id, word).then((res)=>console.log(res))
+				}
+			});
+			
 			getAllRecentPosts(token)
+<<<<<<< HEAD
 			.then((resp) => {
 				const postsData = resp.data;
 				setPosts(postsData);
@@ -63,6 +83,21 @@ export default function Publish({ setPosts }) {
 			.catch((err) => {
 				console.error(err);
 			});
+=======
+				.then((res) => {
+					const postsData = res.data;
+					setPosts(postsData);
+					setRefrash(!refrash);
+					setLoadingFullPage(false)
+					setUrl('')
+					setText('')
+				})
+				.catch((err) => {
+					console.error(err);
+					alert("Não foi possível salvar as alterações");
+					setLoadingFullPage(false)
+				});
+>>>>>>> main
 		});
 	}
 
@@ -78,25 +113,31 @@ export default function Publish({ setPosts }) {
 				/>
 			</ImgBody>
 
-			<Form>
-				<WhatToday>What are you going to share today?</WhatToday>
-				<Inputlink
-					type="text"
-					ref={linkref}
-					onChange={(e) => setUrl(e.target.value)}
-					value={url}
-					placeholder="http://..."
-					required
-					disabled={load}
-				/>
-				<Inputpost
-					type="text"
-					ref={postref}
-					onChange={(e) => setText(e.target.value)}
-					value={text}
-					placeholder="Awesome article about #javascript"
-					disabled={load}
-				/>
+         <Form>
+            <WhatToday>What are you going to share today?</WhatToday>
+            <Inputlink
+               type="text"
+               ref={linkref}
+               onChange={(e) => setUrl(e.target.value)}
+               value={url}
+               placeholder="http://..."
+               required
+               disabled={load}
+            />
+            <Inputpost
+               type="text"
+               ref={postref}
+               onChange={(e) => setText(e.target.value)}
+               value={text}
+               placeholder="Awesome article about #javascript"
+               disabled={load}
+               onKeyDown={(e)=>{
+                if(e.code === 'Enter'){
+                    setClicked(true)
+                    HandleForm(e)
+                }
+               }}
+            />
 
 				<ButtonArea
 					onClick={() => {
