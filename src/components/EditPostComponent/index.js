@@ -34,7 +34,6 @@ export default function Edit({
                   promise
                      .catch((res) => {
                         alert("Não foi possível salvar as alterações");
-                        console.log(res);
                         setDisabled(false)
                      })
                      .then(() => {

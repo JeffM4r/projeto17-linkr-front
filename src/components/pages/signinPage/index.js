@@ -27,8 +27,6 @@ const SignInPage = () => {
       const localPictureUrl = localStorage.getItem('pictureUrl')
       setToken(localToken);
       setPictureUrl(localPictureUrl)
-      console.log(localToken)
-      console.log(localPictureUrl)
       navigate('/timeline');
     }
   }, [])
@@ -57,7 +55,6 @@ const SignInPage = () => {
       } 
     })
     resp.then((resp) => {
-      console.log(resp.data) 
       localStorage.setItem('linkrUserToken', resp.data.token)
       localStorage.setItem('pictureUrl',resp.data.picture)
       setToken(resp.data.token) 

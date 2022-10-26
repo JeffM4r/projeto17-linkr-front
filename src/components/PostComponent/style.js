@@ -8,7 +8,7 @@ export const PostStyle = styled.div`
 	font-size: 17px;
 	font-weight: 300;
 	margin-bottom: 20px;
-	height: 100%;
+	
 	width: 100%;
 	display: flex;
 	justify-content: space-between;

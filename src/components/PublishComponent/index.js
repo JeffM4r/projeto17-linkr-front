@@ -46,13 +46,11 @@ export default function Publish({ setPosts, setLoadingFullPage }) {
 		const promise = publishPost(infos, token);
 		promise.catch((res) => {
 			alert("Houve um erro ao publicar seu link");
-			console.log(res);
 			setClicked(false);
 			setload(false);
 		});
 		promise.then((res) => {
 			alert("Post publicado!");
-			console.log(infos);
 			setClicked(false);
 			linkref.current.value = "";
 			postref.current.value = "";
@@ -60,7 +58,7 @@ export default function Publish({ setPosts, setLoadingFullPage }) {
 
 			wordsArray.forEach((word) => {
 				if(word.trim().startsWith('#')){
-					postHashtag(res.data.id, word).then((res)=>console.log(res))
+					postHashtag(res.data.id, word).then()
 				}
 			});
 			

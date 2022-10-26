@@ -12,7 +12,6 @@ export default function Posts({ posts, setPosts, hashtag }) {
 			.then((resp) => {
 				const postsData = resp.data;
 				setPosts(postsData);
-				console.log( resp.data);
 			})
 			.catch((err) => {
 				console.error(err);
