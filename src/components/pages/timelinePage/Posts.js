@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Error from "../../ErrorComponent";
 import Post from "../../PostComponent";
 import { getAllRecentPosts } from "../../../services/linkr";
+import { ShareComponent } from "../../ShareComponet";
 
 export default function Posts({ posts, setPosts, setLoadingFullPage }) {
 	const [disabled, setDisabled] = useState(false);
@@ -24,6 +25,14 @@ export default function Posts({ posts, setPosts, setLoadingFullPage }) {
 		<>
 			{posts.length !== 0 ? (
 				posts.map((el, i) => (
+					el.repost ? 
+					<ShareComponent 
+						post={el}
+						setLoadingFullPage={setLoadingFullPage}
+						setPosts={setPosts}
+						key={i}
+					/>
+					:
 					<Post
 						setPosts={setPosts}
 						username={el.name}
