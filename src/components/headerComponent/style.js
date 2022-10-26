@@ -155,6 +155,11 @@ export const SearchUserStyle = styled.span`
    h3 {
       font-size: 20px;
       color: #515151;
+      padding-right: 15px;
+   }
+   h4{
+      color: #c5c5c5;
+      font-size: 19px;
    }
    &:hover{
       cursor: pointer;

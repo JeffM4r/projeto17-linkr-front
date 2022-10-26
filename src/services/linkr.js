@@ -100,8 +100,27 @@ function postHashtag(postId, hashtag) {
    return promise;
 }
 
-function searchUsers(username){
-   const promise = axios.get(`${BASE_URL}/search/${username}`)
+function searchUsers(token,username){
+   const conf = createHeaders(token)
+   const promise = axios.get(`${BASE_URL}/search/${username}`,conf)
+   return promise
+}
+
+function followUser( followedId, token){
+   const conf = createHeaders(token)
+   const promise = axios.post(`${BASE_URL}/follow/${followedId}`,{},conf)
+   return promise
+}
+
+function unfollowUser( followedId, token){
+   const conf = createHeaders(token)
+   const promise = axios.delete(`${BASE_URL}/follow/${followedId}`,conf)
+   return promise
+}
+
+function getIsFollowing(followedId, token){
+   const conf = createHeaders(token)
+   const promise = axios.get(`${BASE_URL}/follow/${followedId}`,conf)
    return promise
 }
 
@@ -119,5 +138,8 @@ export {
    getNumLikes,
    getUserInfo,
    postHashtag,
-   searchUsers
+   searchUsers,
+   followUser,
+   unfollowUser,
+   getIsFollowing
 }
