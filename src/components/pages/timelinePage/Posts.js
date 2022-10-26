@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import Error from "../../ErrorComponent";
 import Post from "../../PostComponent";
 import { getAllRecentPosts } from "../../../services/linkr";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function Posts({ posts, setPosts, setLoadingFullPage }) {
 	const [disabled, setDisabled] = useState(false);
 	const token = localStorage.getItem("linkrUserToken");
+	const [limit, setLimit] = useState(10)
 
 	useEffect(() => {
 		getAllRecentPosts(token)
@@ -20,10 +22,20 @@ export default function Posts({ posts, setPosts, setLoadingFullPage }) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	function callNew() {
+		setLimit(prev => prev + 10)
+	}
+
 	return (
-		<>
+		<InfiniteScroll
+			dataLength={posts.length}
+			next={callNew}
+			hasMore={true}
+			style={{ overflow: 'hidden' }}
+			scrollThreshold={0.99}
+		>
 			{posts.length !== 0 ? (
-				posts.map((el, i) => (
+				posts.slice(0, limit).map((el, i) => (
 					<Post
 						setPosts={setPosts}
 						username={el.name}
@@ -44,6 +56,6 @@ export default function Posts({ posts, setPosts, setLoadingFullPage }) {
 					<p>"There are no posts yet..."</p>
 				</>
 			)}
-		</>
+		</InfiniteScroll>
 	);
 }
