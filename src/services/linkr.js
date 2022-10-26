@@ -117,6 +117,12 @@ function unfollowUser( followedId, token){
    return promise
 }
 
+function getIsFollowing(followedId, token){
+   const conf = createHeaders(token)
+   const promise = axios.get(`${BASE_URL}/follow/${followedId}`,conf)
+   return promise
+}
+
 export {
    getAllRecentPosts,
    getMetaDados,
@@ -133,5 +139,6 @@ export {
    postHashtag,
    searchUsers,
    followUser,
-   unfollowUser
+   unfollowUser,
+   getIsFollowing
 }

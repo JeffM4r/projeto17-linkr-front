@@ -50,7 +50,7 @@ export const UserPosts = styled.div`
 
 export const FolllowButton = styled.div`
    cursor: pointer;
-   display:flex;
+   display:${props => props.display};
    justify-content: center;
    align-items: center;
    background-color: ${(props) => props.background};
