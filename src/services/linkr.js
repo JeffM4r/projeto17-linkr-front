@@ -105,6 +105,18 @@ function searchUsers(username){
    return promise
 }
 
+function followUser( followedId, token){
+   const conf = createHeaders(token)
+   const promise = axios.post(`${BASE_URL}/follow/${followedId}`,{},conf)
+   return promise
+}
+
+function unfollowUser( followedId, token){
+   const conf = createHeaders(token)
+   const promise = axios.delete(`${BASE_URL}/follow/${followedId}`,conf)
+   return promise
+}
+
 export {
    getAllRecentPosts,
    getMetaDados,
@@ -119,5 +131,7 @@ export {
    getNumLikes,
    getUserInfo,
    postHashtag,
-   searchUsers
+   searchUsers,
+   followUser,
+   unfollowUser
 }
