@@ -100,8 +100,9 @@ function postHashtag(postId, hashtag) {
    return promise;
 }
 
-function searchUsers(username){
-   const promise = axios.get(`${BASE_URL}/search/${username}`)
+function searchUsers(token,username){
+   const conf = createHeaders(token)
+   const promise = axios.get(`${BASE_URL}/search/${username}`,conf)
    return promise
 }
 

@@ -61,7 +61,7 @@ function HeaderComponent({ setUserInfo, setLoading }) {
                   placeholder="Search for people"
                   onChange={(e) => {
                      if (e.target.value !== "") {
-                        searchUsers(e.target.value)
+                        searchUsers(token,e.target.value)
                            .catch((err) => console.log(err))
                            .then((res) => {
                               setUsersList(res.data);
@@ -92,6 +92,7 @@ function HeaderComponent({ setUserInfo, setLoading }) {
                      >
                         <img src={user.picture} alt="user's image" />
                         <h3>{user.name}</h3>
+                        {user.followId ? <h4>• following</h4> : ''}
                      </SearchUserStyle>
                   ))}
                </SearchList>
