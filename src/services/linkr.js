@@ -105,6 +105,17 @@ function searchUsers(username){
    return promise
 }
 
+function sharePost(token, postId){
+   const conf = createHeaders(token)
+   const promise = axios.post(`${BASE_URL}/share/${postId}`, {}, conf);
+   return promise;
+}
+
+function getCountShare (postId) {
+   const promise = axios.get(`${BASE_URL}/share/${postId}`)
+   return promise;
+}
+
 export {
    getAllRecentPosts,
    getMetaDados,
@@ -119,5 +130,7 @@ export {
    getNumLikes,
    getUserInfo,
    postHashtag,
-   searchUsers
+   searchUsers,
+   sharePost,
+   getCountShare
 }

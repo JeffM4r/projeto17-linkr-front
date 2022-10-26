@@ -1,6 +1,14 @@
 import styled from "styled-components";
 
-export const Button = styled.div``;
+export const Button = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p{
+    font-size: 13px;
+    text-align: center;
+  }
+`;
 
 export const Repost = styled.div`
 	display: flex;

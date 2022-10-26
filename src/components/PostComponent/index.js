@@ -4,7 +4,7 @@ import { PostStyle, ModalZone} from "./style";
 import LinkPreview from "../PreviewLinkComponent";
 import hashtagInText from "../hashtagInText";
 import Likes from "../LikesComponent";
-import { getMetaDados } from "../../services/linkr";
+import { getMetaDados, getCountShare } from "../../services/linkr";
 import Edit from "../EditPostComponent/index";
 import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 import UserContext from "../contexts/UserContext";
@@ -30,6 +30,7 @@ export default function Post({
 	const [inputText, setInputText] = useState(text);
 	const [disabled, setDisabled] = useState(false);
 	const [likedAlreadi, setLikedAlreadi] = useState(likedAlready)
+	const [shareCount, setShareCount] = useState('0')
 
 	const [openDelModal, setOpenDelModal] = useState(false)
 
@@ -41,6 +42,13 @@ export default function Post({
 	};
 
 	useEffect(() => {
+		getCountShare(postId)
+		.then((resp) => {
+			const count = resp.data
+			setShareCount(count.count)
+		})
+		.catch((err) => console.error(err))
+		
 		getMetaDados(url)
 			.then((resp) => {
 				const data = resp.data;
@@ -75,7 +83,7 @@ export default function Post({
 								onClick={handleGoToUserPage}
 							/>
 							<Likes postId={postId} likedAlready={likedAlreadi} setLikedAlready={setLikedAlreadi} />
-							<ShareButton />
+							<ShareButton shareCount={shareCount} postId={postId} setLoadingFullPage={setLoadingFullPage} setPosts={setPosts} />
 						</div>
 						<div>
 							<div>
