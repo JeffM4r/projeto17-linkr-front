@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { PostStyle, ModalZone} from "./style";
+import { PostStyle, ModalZone, PostC} from "./style";
 import LinkPreview from "../PreviewLinkComponent";
 import hashtagInText from "../hashtagInText";
 import Likes from "../LikesComponent";
@@ -9,6 +9,7 @@ import Edit from "../EditPostComponent/index";
 import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 import UserContext from "../contexts/UserContext";
 import DeleteModal from "../deleteModalComponent";
+import { CommentsButton, CommentsComponent } from "../ComentsComponent";
 
 export default function Post({
 	username,
@@ -29,6 +30,7 @@ export default function Post({
 	const [inputText, setInputText] = useState(text);
 	const [disabled, setDisabled] = useState(false);
 	const [likedAlreadi, setLikedAlreadi] = useState(likedAlready)
+	const [showComments, setShowComments] = useState(false)
 
 	const [openDelModal, setOpenDelModal] = useState(false)
 
@@ -66,6 +68,7 @@ export default function Post({
 			:
 			<>
 				{postData.description ? (
+					<>
 					<PostStyle>
 						<div>
 							<img
@@ -74,6 +77,7 @@ export default function Post({
 								onClick={handleGoToUserPage}
 							/>
 							<Likes postId={postId} likedAlready={likedAlreadi} setLikedAlready={setLikedAlreadi} />
+							<CommentsButton showComments={showComments} setShowComments={setShowComments} />
 						</div>
 						<div>
 							<div>
@@ -117,7 +121,9 @@ export default function Post({
 								image={postData.image.url}
 							/>
 						</div>
-					</PostStyle>
+						</PostStyle>
+					<CommentsComponent display={showComments} />
+					</>
 				) : (
 					<PostStyle>
 						<h3>Loading...</h3>
