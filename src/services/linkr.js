@@ -130,6 +130,11 @@ function getPostsCount(token){
    return promise;
 }
 
+function deleteHashtags(postId){
+   const promise = axios.delete(`http://localhost:4000/hashtags/${postId}`)
+   return promise
+}
+
 export {
    getAllRecentPosts,
    getMetaDados,
@@ -148,5 +153,6 @@ export {
    followUser,
    unfollowUser,
    getIsFollowing,
-   getPostsCount
+   getPostsCount,
+   deleteHashtags
 }

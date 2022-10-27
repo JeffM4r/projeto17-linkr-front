@@ -1,4 +1,4 @@
-import { editPost, getAllRecentPosts } from "../../services/linkr";
+import { editPost, getAllRecentPosts, deleteHashtags, postHashtag } from "../../services/linkr";
 import EditPost from "./style";
 import { useContext,useRef, useEffect } from "react";
 import UserContext from "../contexts/UserContext";
@@ -43,6 +43,17 @@ export default function Edit({
                         setDisabled(false)
                      })
                      .then(() => {
+                        deleteHashtags(postId)
+                           .then((res)=>{console.log(res)})
+                        
+                        const wordsArray = inputText.split(' ')
+
+                        wordsArray.forEach((word) => {
+                           if(word.trim().startsWith('#')){
+                              postHashtag(postId, word).then((res)=>console.log(res))
+                           }
+                        });
+                        
                         getAllRecentPosts(token)
                            .then((resp) => {
                               const postsData = resp.data;
