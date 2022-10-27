@@ -28,3 +28,7 @@ export const TimelinePage = styled.div`
 		}
 	}
 `;
+export const TextNoPosts = styled.p`
+	font-size: 27px;
+	text-align: center;
+`
