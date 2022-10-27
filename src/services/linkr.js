@@ -124,6 +124,12 @@ function getIsFollowing(followedId, token){
    return promise
 }
 
+function getPostsCount(token){
+   const conf = createHeaders(token)
+   const promise = axios.get(`${BASE_URL}/update`,conf)
+   return promise;
+}
+
 export {
    getAllRecentPosts,
    getMetaDados,
@@ -141,5 +147,6 @@ export {
    searchUsers,
    followUser,
    unfollowUser,
-   getIsFollowing
+   getIsFollowing,
+   getPostsCount
 }
