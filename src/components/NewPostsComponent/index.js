@@ -60,7 +60,7 @@ const NewPosts = ({ view, setView, setPosts, setLoadingFullPage }) => {
   return (
     view ? 
     <Container onClick={handleGetUpdate}>
-      <p>{newPosts} new posts, load more!</p>
+      <p>{newPosts} {newPosts > 1 ? 'new posts' : 'post'}, load more!</p>
       <TfiReload style={iconStyle} />
     </Container>
     : <></>
