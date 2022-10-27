@@ -1,34 +1,71 @@
+import { useEffect, useState } from 'react'
 import { AiOutlineComment } from 'react-icons/ai'
 import { SlPaperPlane } from 'react-icons/sl'
+import { getPostComments } from '../../services/linkr'
 import {
   Container,
-  Comment,
+  CommentStyle,
   Message,
   CommentButton,
   InputCommentArea,
   Input
 } from './style'
 
-const CommentsComponent = ({ display }) => {
+const Comment = ({ userImg, userName, text, following, owner, key }) => {
+  let aditional = ''
+  if(following) aditional = '• following'
+  if(owner) aditional = "• post's author"
+  return (
+    <CommentStyle key={key}>
+      <img src={userImg} />
+      <div>
+        <p>{userName} <h5>{aditional}</h5></p>
+        <Message>{text}</Message>
+      </div>
+    </CommentStyle>
+  )
+}
+
+const CommentsComponent = ({ display, postId, setCommentsCount }) => {
 
   const userImg = localStorage.getItem('pictureUrl')
+  const token = localStorage.getItem('linkrUserToken')
+
+  const [postComments, setPostComments] = useState([])
+
+  useEffect(() => {
+    getUpdateComments();
+  }, [])
+
+  function getUpdateComments() {
+    getPostComments(token, postId)
+    .then((resp) => {
+      setPostComments(resp.data)
+      setCommentsCount(resp.data.length)
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+  }
 
   return (
     <Container display={display}>
-      <Comment>
-        <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWvcSx7lBi1Hcb--iKthqRLf4zBkeuyk-slA&usqp=CAU'} />
-        <div>
-          <p>UserNmae <h5> • following</h5></p>
-          <Message>Ok testing</Message>
-        </div>
-      </Comment>
-      <Comment>
-        <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWvcSx7lBi1Hcb--iKthqRLf4zBkeuyk-slA&usqp=CAU'} />
-        <div>
-          <p>UserNmae <h5> • following</h5></p>
-          <Message>Ok testing</Message>
-        </div>
-      </Comment>
+
+      {postComments.map((comment, index) => {
+        return (
+          <Comment 
+            userImg={comment.picture}
+            userName={comment.name}
+            text={comment.text}
+            following={comment.followed}
+            owner={comment.owner}
+            key={index}
+          />
+        );
+      //userImg={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWvcSx7lBi1Hcb--iKthqRLf4zBkeuyk-slA&usqp=CAU'}
+      })}
+      
+
       <InputCommentArea>
         <img src={userImg} />
         <Input>
@@ -40,11 +77,11 @@ const CommentsComponent = ({ display }) => {
   )
 }
 
-const CommentsButton = ({ showComments, setShowComments }) => {
+const CommentsButton = ({ showComments, setShowComments, commentsCount }) => {
   return (
     <CommentButton onClick={() => {setShowComments(!showComments)}} >
       <AiOutlineComment />
-      <p>0</p>
+      <p>{commentsCount}</p>
     </CommentButton>
   )
 }

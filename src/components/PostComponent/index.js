@@ -31,6 +31,7 @@ export default function Post({
 	const [disabled, setDisabled] = useState(false);
 	const [likedAlreadi, setLikedAlreadi] = useState(likedAlready)
 	const [showComments, setShowComments] = useState(false)
+	const [commentsCount, setCommentsCount] = useState(0)
 
 	const [openDelModal, setOpenDelModal] = useState(false)
 
@@ -77,7 +78,7 @@ export default function Post({
 								onClick={handleGoToUserPage}
 							/>
 							<Likes postId={postId} likedAlready={likedAlreadi} setLikedAlready={setLikedAlreadi} />
-							<CommentsButton showComments={showComments} setShowComments={setShowComments} />
+							<CommentsButton showComments={showComments} setShowComments={setShowComments} commentsCount={commentsCount} />
 						</div>
 						<div>
 							<div>
@@ -122,7 +123,7 @@ export default function Post({
 							/>
 						</div>
 						</PostStyle>
-					<CommentsComponent display={showComments} />
+					<CommentsComponent display={showComments} postId={postId} setCommentsCount={setCommentsCount} />
 					</>
 				) : (
 					<PostStyle>

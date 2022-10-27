@@ -15,7 +15,7 @@ export const Container = styled.div`
   }
 `;
 
-export const Comment = styled.div`
+export const CommentStyle = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 15px;

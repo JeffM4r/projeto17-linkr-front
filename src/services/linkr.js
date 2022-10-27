@@ -141,6 +141,12 @@ function getNumFollowers (token){
    return promise
 }
 
+function getPostComments(token, postId) {
+   const conf = createHeaders(token)
+   const promise = axios.get(`${BASE_URL}/comments/${postId}`, conf)
+   return promise;
+}
+
 export {
    getAllRecentPosts,
    getMetaDados,
@@ -161,5 +167,6 @@ export {
    getIsFollowing,
    getPostsCount,
    deleteHashtags,
-   getNumFollowers
+   getNumFollowers,
+   getPostComments
 }
