@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react";
 import Error from "../../ErrorComponent";
 import Post from "../../PostComponent";
-import { getAllRecentPosts } from "../../../services/linkr";
+import { getAllRecentPosts, getNumFollowers } from "../../../services/linkr";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { TextNoPosts } from './style';
 
 export default function Posts({ posts, setPosts, setLoadingFullPage }) {
 	const [disabled, setDisabled] = useState(false);
 	const token = localStorage.getItem("linkrUserToken");
 	const [limit, setLimit] = useState(10)
+	const [followersNumber, setFollowersNumber] = useState(0)
 
 	useEffect(() => {
+		getFriends()
 		getAllRecentPosts(token)
 			.then((resp) => {
 				const postsData = resp.data;
@@ -24,6 +27,16 @@ export default function Posts({ posts, setPosts, setLoadingFullPage }) {
 
 	function callNew() {
 		setLimit(prev => prev + 10)
+	}
+
+	async function getFriends (){
+		try {
+			const res = await getNumFollowers(token)
+			console.log(res.data)
+			setFollowersNumber(res.data)
+		} catch (error) {
+			console.log(error.message)
+		}
 	}
 
 	return (
@@ -50,10 +63,15 @@ export default function Posts({ posts, setPosts, setLoadingFullPage }) {
 						setLoadingFullPage={setLoadingFullPage}
 					/>
 				))
-			) : (
+			) : followersNumber === 0 ? (
 				<>
 					<Error condition={disabled} />
-					<p>"There are no posts yet..."</p>
+					<TextNoPosts>You don't follow anyone yet. Search for new friends!</TextNoPosts>
+				</>
+			): (
+				<>
+					<Error condition={disabled} />
+					<TextNoPosts>No posts found from your friends</TextNoPosts>
 				</>
 			)}
 		</InfiniteScroll>

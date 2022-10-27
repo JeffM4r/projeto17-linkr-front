@@ -73,7 +73,7 @@ function HeaderComponent({ setUserInfo, setLoading }) {
                />
                <AiOutlineSearch style={styleSearch} />
                <SearchList display={usersList.length === 0 ? "none" : "flex"}>
-                  {usersList.map((user, index) => (
+                  {usersList[1]?.map((user, index) => (
                      <SearchUserStyle
                         key={index}
                         onClick={() => {
@@ -90,9 +90,30 @@ function HeaderComponent({ setUserInfo, setLoading }) {
                            });
                         }}
                      >
-                        <img src={user.picture} alt="user's image" />
+                        <img src={user.picture} alt="user" />
                         <h3>{user.name}</h3>
-                        {user.followId ? <h4>• following</h4> : ''}
+                        <h4>• following</h4>
+                     </SearchUserStyle>
+                  ))}
+                  {usersList[0]?.map((user, index) => (
+                     <SearchUserStyle
+                        key={index}
+                        onClick={() => {
+                           navigate(`/user/${user.id}`);
+                           setLoading(true);
+                           const promise = getUserInfo(user.id, token);
+                           promise.catch((error) => {
+                              console.log(error);
+                              setLoading(false);
+                           });
+                           promise.then((resp) => {
+                              setUserInfo(resp.data);
+                              setLoading(false);
+                           });
+                        }}
+                     >
+                        <img src={user.picture} alt="user" />
+                        <h3>{user.name}</h3>
                      </SearchUserStyle>
                   ))}
                </SearchList>
@@ -106,7 +127,7 @@ function HeaderComponent({ setUserInfo, setLoading }) {
                         ? pictureUrl
                         : "https://yt3.ggpht.com/a/AATXAJyAjXWhg85XlBUBufDpYQ7zB7GIiIlg9js4_wCoFA=s900-c-k-c0xffffffff-no-rj-mo"
                   }
-                  alt="users' picture"
+                  alt="user"
                />
             </div>
          </HeaderStyle>
@@ -147,7 +168,7 @@ function HeaderComponent({ setUserInfo, setLoading }) {
                         });
                      }}
                   >
-                     <img src={user.picture} alt="user's image" />
+                     <img src={user.picture} alt="user" />
                      <h3>{user.name}</h3>
                   </SearchUserStyle>
                ))}

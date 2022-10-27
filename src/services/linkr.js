@@ -131,7 +131,13 @@ function getPostsCount(token){
 }
 
 function deleteHashtags(postId){
-   const promise = axios.delete(`http://localhost:4000/hashtags/${postId}`)
+   const promise = axios.delete(`${BASE_URL}/hashtags/${postId}`)
+   return promise
+}
+
+function getNumFollowers (token){
+   const conf = createHeaders(token)
+   const promise = axios.get(`${BASE_URL}/numFollow`,conf)
    return promise
 }
 
@@ -154,5 +160,6 @@ export {
    unfollowUser,
    getIsFollowing,
    getPostsCount,
-   deleteHashtags
+   deleteHashtags,
+   getNumFollowers
 }
