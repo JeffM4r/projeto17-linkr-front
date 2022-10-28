@@ -1,8 +1,7 @@
 import axios from "axios";
 import mql from "@microlink/mql";
 
-//const BASE_URL = "https://xprojeto17-linkr.herokuapp.com";
-const BASE_URL = "http://localhost:4000";
+const BASE_URL = "https://xprojeto17-linkr.herokuapp.com";
 
 function createHeaders(token) {
    const config = {

@@ -7,7 +7,7 @@ import {
 } from './style'
 
 function getHashtagList () {
-  const promise = axios.get('http://localhost:4000/hashtags')
+  const promise = axios.get('https://xprojeto17-linkr.herokuapp.com/hashtags')
   return promise;
 }
 

@@ -27,9 +27,7 @@ export default function Publish({ setPosts, setLoadingFullPage }) {
 	const token = localStorage.getItem("linkrUserToken");
 	setPictureUrl(localPictureUrl);
 	const { refrash, setRefrash } = useContext(UserContext);
-	
-	//desative buttons and area
-	const [load, setload] = useState(false);
+		const [load, setload] = useState(false);
 	const [clicked, setClicked] = useState(false);
 
 	function HandleForm(e) {
