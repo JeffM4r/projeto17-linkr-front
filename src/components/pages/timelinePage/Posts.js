@@ -17,6 +17,7 @@ export default function Posts({ posts, setPosts, setLoadingFullPage }) {
 		getAllRecentPosts(token)
 			.then((resp) => {
 				const postsData = resp.data;
+				console.log(postsData[0])
 				setPosts(postsData);
 			})
 			.catch((err) => {
