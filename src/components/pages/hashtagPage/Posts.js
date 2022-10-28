@@ -17,7 +17,6 @@ export default function Posts({ posts, setPosts, setLoadingFullPage, hashtag }) 
 		getHastagPosts(hashtag, token)
 			.then((resp) => {
 				const postsData = resp.data;
-				console.log(postsData[0])
 				setPosts(postsData);
 			})
 			.catch((err) => {
