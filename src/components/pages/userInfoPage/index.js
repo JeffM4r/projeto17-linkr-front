@@ -15,6 +15,7 @@ const UserInfoPage = () => {
    const params = useParams();
    const token = localStorage.getItem("linkrUserToken");
 
+   const [able, setAble] = useState(true)
    const [userInfo, setUserInfo] = useState();
    const [loading, setLoading] = useState(false);
    const [isFollowing, setIsFollowing] = useState(false);
@@ -32,7 +33,7 @@ const UserInfoPage = () => {
          getIsFollowing(userId, token)
             .catch((res) => console.log(res))
             .then((res) => {
-               setLoading(false);
+            setLoading(false);
 			   setIsFollowing(res.data);
             });
       });
@@ -60,8 +61,8 @@ const UserInfoPage = () => {
                         color={isFollowing.bool ? "#1877F2" : "#FFFFFF"}
                         background={isFollowing.bool ? "#FFFFFF" : "#1877F2"}
                         onClick={() => {
-                           if (isFollowing.bool === false) {
-                              //disable button
+                           if (isFollowing.bool === false && able === true) {
+                              setAble(false)
                               followUser(userInfo.id, token)
                                  .catch((res) => {
                                     alert(
@@ -69,6 +70,7 @@ const UserInfoPage = () => {
                                     );
 
                                     console.log(res);
+                                    setAble(true)
                                  })
                                  .then((res) => {
                                     console.log(res);
@@ -76,21 +78,24 @@ const UserInfoPage = () => {
                                        ...isFollowing,
                                        bool: true,
                                     });
+                                    setAble(true)
                                     //able button
                                  });
-                           } else {
-                              //disable button
+                           } else if(able === true){
+                              setAble(false)
                               unfollowUser(userInfo.id, token)
                                  .catch((res) => {
                                     alert(
                                        "Não foi possível executar a operação"
                                     );
                                     console.log(res);
+                                    setAble(true)
                                  })
                                  .then((res) => {
                                     console.log(res);
                                     setIsFollowing({...isFollowing,
 									bool:false});
+                           setAble(true)
                                  });
                            }
                         }}
