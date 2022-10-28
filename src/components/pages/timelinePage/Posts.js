@@ -4,6 +4,7 @@ import Post from "../../PostComponent";
 import { getAllRecentPosts, getNumFollowers } from "../../../services/linkr";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { TextNoPosts } from './style';
+import { ShareComponent } from "../../ShareComponet";
 
 export default function Posts({ posts, setPosts, setLoadingFullPage }) {
 	const [disabled, setDisabled] = useState(false);
@@ -49,6 +50,14 @@ export default function Posts({ posts, setPosts, setLoadingFullPage }) {
 		>
 			{posts.length !== 0 ? (
 				posts.slice(0, limit).map((el, i) => (
+					el.repost ? 
+					<ShareComponent 
+						post={el}
+						setLoadingFullPage={setLoadingFullPage}
+						setPosts={setPosts}
+						key={i}
+					/>
+					:
 					<Post
 						setPosts={setPosts}
 						username={el.name}

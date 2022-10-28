@@ -4,12 +4,13 @@ import { PostStyle, ModalZone, PostC} from "./style";
 import LinkPreview from "../PreviewLinkComponent";
 import hashtagInText from "../hashtagInText";
 import Likes from "../LikesComponent";
-import { getMetaDados } from "../../services/linkr";
+import { getMetaDados, getCountShare } from "../../services/linkr";
 import Edit from "../EditPostComponent/index";
 import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 import UserContext from "../contexts/UserContext";
 import DeleteModal from "../deleteModalComponent";
 import { CommentsButton, CommentsComponent } from "../ComentsComponent";
+import { ShareButton } from "../ShareComponet";
 
 export default function Post({
 	username,
@@ -32,6 +33,7 @@ export default function Post({
 	const [likedAlreadi, setLikedAlreadi] = useState(likedAlready)
 	const [showComments, setShowComments] = useState(false)
 	const [commentsCount, setCommentsCount] = useState(0)
+	const [shareCount, setShareCount] = useState('0')
 
 	const [openDelModal, setOpenDelModal] = useState(false)
 
@@ -43,6 +45,13 @@ export default function Post({
 	};
 
 	useEffect(() => {
+		getCountShare(postId)
+		.then((resp) => {
+			const count = resp.data
+			setShareCount(count.count)
+		})
+		.catch((err) => console.error(err))
+		
 		getMetaDados(url)
 			.then((resp) => {
 				const data = resp.data;
@@ -79,6 +88,7 @@ export default function Post({
 							/>
 							<Likes postId={postId} likedAlready={likedAlreadi} setLikedAlready={setLikedAlreadi} />
 							<CommentsButton showComments={showComments} setShowComments={setShowComments} commentsCount={commentsCount} />
+							<ShareButton shareCount={shareCount} postId={postId} setLoadingFullPage={setLoadingFullPage} setPosts={setPosts} />
 						</div>
 						<div>
 							<div>
