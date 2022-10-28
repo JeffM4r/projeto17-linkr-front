@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { TimelinePage, PageStyle } from "./style";
 import Posts from "./Posts";
 import TrendingComponent from "../../TrendingComponent";
 import HeaderComponent from "../../headerComponent";
 import Publish from "../../PublishComponent";
-import { getAllRecentPosts } from "../../../services/linkr";
 import NewPosts from '../../NewPostsComponent';
 
 export default function Timeline() {
