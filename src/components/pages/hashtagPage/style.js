@@ -14,7 +14,7 @@ export const TimelinePage = styled.div`
 	width: 100%;
 	max-width: 700px;
 	color: white;
-	margin: 125px 0 0 0;
+	margin: 140px 0 0 0;
 
 	h2 {
 		font-family: "Oswald", sans-serif;
@@ -28,3 +28,7 @@ export const TimelinePage = styled.div`
 		}
 	}
 `;
+export const TextNoPosts = styled.p`
+	font-size: 27px;
+	text-align: center;
+`
