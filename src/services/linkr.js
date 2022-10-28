@@ -141,6 +141,29 @@ function getNumFollowers (token){
    return promise
 }
 
+function getPostComments(token, postId) {
+   const conf = createHeaders(token)
+   const promise = axios.get(`${BASE_URL}/comments/${postId}`, conf)
+   return promise;
+}
+
+function sharePost(token, postId){
+   const conf = createHeaders(token)
+   const promise = axios.post(`${BASE_URL}/share/${postId}`, {}, conf);
+   return promise;
+}
+
+function getCountShare (postId) {
+   const promise = axios.get(`${BASE_URL}/share/${postId}`)
+   return promise;
+}
+
+function insertPostComment(token, postId, text){
+   const conf = createHeaders(token)
+   const promise = axios.post(`${BASE_URL}/comments/${postId}`, {text:text}, conf);
+   return promise;
+}
+
 export {
    getAllRecentPosts,
    getMetaDados,
@@ -161,5 +184,9 @@ export {
    getIsFollowing,
    getPostsCount,
    deleteHashtags,
-   getNumFollowers
+   getNumFollowers,
+   getPostComments,
+   sharePost,
+   getCountShare,
+   insertPostComment
 }

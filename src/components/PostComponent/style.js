@@ -13,6 +13,8 @@ export const PostStyle = styled.div`
 	display: flex;
 	justify-content: space-between;
 	word-wrap: break-word;
+	position: relative;
+	z-index: 10;
 
 	h3 {
 		font-weight: 500;
