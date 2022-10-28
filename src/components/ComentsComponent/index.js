@@ -76,7 +76,6 @@ const CommentsComponent = ({ display, postId, setCommentsCount }) => {
             key={index}
           />
         );
-      //userImg={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWvcSx7lBi1Hcb--iKthqRLf4zBkeuyk-slA&usqp=CAU'}
       })}
       
 

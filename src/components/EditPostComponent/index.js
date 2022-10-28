@@ -44,13 +44,13 @@ export default function Edit({
                      })
                      .then(() => {
                         deleteHashtags(postId)
-                           .then((res)=>{console.log(res)})
+                           .then()
                         
                         const wordsArray = inputText.split(' ')
 
                         wordsArray.forEach((word) => {
                            if(word.trim().startsWith('#')){
-                              postHashtag(postId, word).then((res)=>console.log(res))
+                              postHashtag(postId, word).then()
                            }
                         });
                         

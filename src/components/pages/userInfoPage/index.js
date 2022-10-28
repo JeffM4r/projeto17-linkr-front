@@ -56,8 +56,6 @@ const UserInfoPage = () => {
                      </span>
                      <FolllowButton
                         display={userId == isFollowing.userId ? "none" : "flex"}
-                        //request para identifcar userId do usuario
-                        DisableButton
                         color={isFollowing.bool ? "#1877F2" : "#FFFFFF"}
                         background={isFollowing.bool ? "#FFFFFF" : "#1877F2"}
                         onClick={() => {
@@ -79,8 +77,7 @@ const UserInfoPage = () => {
                                        bool: true,
                                     });
                                     setAble(true)
-                                    //able button
-                                 });
+                                                                  });
                            } else if(able === true){
                               setAble(false)
                               unfollowUser(userInfo.id, token)
