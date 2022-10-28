@@ -7,7 +7,7 @@ import {
     Modalzone
 
 } from "./style.js"
-import { deletePost } from "../../services/linkr.js";
+import { deletePost,deleteHashtags } from "../../services/linkr.js";
 
 export default function DeleteModal({ id, setOpenDelModal, setLoadingFullPage }) {
     const token = localStorage.getItem("linkrUserToken");
@@ -21,6 +21,7 @@ export default function DeleteModal({ id, setOpenDelModal, setLoadingFullPage })
             setLoadingFullPage(false)
         })
         promise.then((resp) => {
+            deleteHashtags(id).then()
             setOpenDelModal(false)
             setLoadingFullPage(false)
         })
