@@ -22,7 +22,6 @@ const UserInfoPage = () => {
    const userId = params.id;
 
    useEffect(() => {
-      setLoading(true);
       const promise = getUserInfo(userId, token);
       promise.catch((error) => {
          console.log(error);

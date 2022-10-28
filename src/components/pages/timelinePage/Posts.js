@@ -17,7 +17,6 @@ export default function Posts({ posts, setPosts, setLoadingFullPage }) {
 		getAllRecentPosts(token)
 			.then((resp) => {
 				const postsData = resp.data;
-				console.log(postsData[0])
 				setPosts(postsData);
 			})
 			.catch((err) => {
@@ -34,7 +33,6 @@ export default function Posts({ posts, setPosts, setLoadingFullPage }) {
 	async function getFriends (){
 		try {
 			const res = await getNumFollowers(token)
-			console.log(res.data)
 			setFollowersNumber(res.data)
 		} catch (error) {
 			console.log(error.message)
