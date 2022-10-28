@@ -158,6 +158,12 @@ function getCountShare (postId) {
    return promise;
 }
 
+function insertPostComment(token, postId, text){
+   const conf = createHeaders(token)
+   const promise = axios.post(`${BASE_URL}/comments/${postId}`, {text:text}, conf);
+   return promise;
+}
+
 export {
    getAllRecentPosts,
    getMetaDados,
@@ -181,5 +187,6 @@ export {
    getNumFollowers,
    getPostComments,
    sharePost,
-   getCountShare
+   getCountShare,
+   insertPostComment
 }

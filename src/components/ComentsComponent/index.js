@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AiOutlineComment } from 'react-icons/ai'
 import { SlPaperPlane } from 'react-icons/sl'
-import { getPostComments } from '../../services/linkr'
+import { getPostComments, insertPostComment } from '../../services/linkr'
 import {
   Container,
   CommentStyle,
@@ -32,6 +32,8 @@ const CommentsComponent = ({ display, postId, setCommentsCount }) => {
   const token = localStorage.getItem('linkrUserToken')
 
   const [postComments, setPostComments] = useState([])
+  const [commentText, setCommentText] = useState('')
+
 
   useEffect(() => {
     getUpdateComments();
@@ -42,6 +44,18 @@ const CommentsComponent = ({ display, postId, setCommentsCount }) => {
     .then((resp) => {
       setPostComments(resp.data)
       setCommentsCount(resp.data.length)
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+  }
+
+  function handleSendComment() {
+    if(!commentText) return;
+    insertPostComment(token, postId, commentText)
+    .then((resp) => {
+      setCommentText('')
+      getUpdateComments()
     })
     .catch((err) => {
       console.error(err)
@@ -69,8 +83,14 @@ const CommentsComponent = ({ display, postId, setCommentsCount }) => {
       <InputCommentArea>
         <img src={userImg} />
         <Input>
-          <input placeholder='write a comment...'/>
-          <SlPaperPlane />
+          <input 
+            placeholder='write a comment...'
+            value={commentText}
+            onChange={(e) => setCommentText(e.target.value)}
+          />
+          <div onClick={handleSendComment}>
+            <SlPaperPlane />
+          </div>
         </Input>
       </InputCommentArea>
     </Container>

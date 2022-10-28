@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
+  display: flex;
+  flex-direction: column;
   background-color: #1E1E1E;
   margin-top: -40px;
   margin-bottom: 20px;
@@ -89,6 +91,13 @@ export const Input = styled.div`
   padding: 0 10px;
   margin-left: 20px;
   border-radius: 10px;
+
+  div{
+    &:hover{
+      cursor: pointer;
+    }
+  }
+
   input{
     width: 90%;
     height: 40px;
